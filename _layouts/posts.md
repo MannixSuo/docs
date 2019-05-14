@@ -1,3 +1,5 @@
-# {{page.title}}
+---
+title: {{page.title}}
+---
 
 {{content}}
