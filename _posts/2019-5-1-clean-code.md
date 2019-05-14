@@ -1,5 +1,5 @@
 ---
-title: Clean Code: A Handbook of Agile Software Craft
+title: Clean Code A Handbook of Agile Software Craft
 layout: default
 ---
 
