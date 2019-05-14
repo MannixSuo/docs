@@ -1,5 +1,4 @@
 ---
-layout: posts
 title: Clean Code A Handbook of Agile Software Craft
 ---
 
