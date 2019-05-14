@@ -1,4 +1,4 @@
-# MannixSuo Blog
+# new article
 
 {% for post in site.posts %}
 

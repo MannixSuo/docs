@@ -1,4 +1,5 @@
 ---
+layout: default
 title: Clean Code A Handbook of Agile Software Craft
 ---
 
