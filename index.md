@@ -1,7 +1,4 @@
----
-title: MannixSuo Blog
----
-## {{ page.title }}
+# MannixSuo Blog
 
 {% for post in site.posts %}
 

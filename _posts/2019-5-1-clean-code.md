@@ -1,6 +1,5 @@
 ---
 title: Clean Code A Handbook of Agile Software Craft
-layout: default
 ---
 
 ## 代码整洁之道
