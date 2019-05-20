@@ -18,7 +18,7 @@ clients that use it .
 
 ## Implementation
 
-![strategy implementation](../pictures/strategy_implementation_-_uml_class_diagram.gif)
+![strategy implementation](/pictures/strategy_implementation_-_uml_class_diagram.gif)
 
 **Strategy** - defines an interface common to all supported algorithms .
 **Context** uses this interface to call algorithms defined by a 
@@ -29,6 +29,7 @@ clients that use it .
 **Context:**
 
 > contains a reference to a strategy object.
+>
 > may define a interface that lets strategy accessing its data.
 
 The **Context** object contains a reference to the **ConcreteStrategy**
@@ -44,7 +45,7 @@ only with the context.
 
 ## Applicability(适用性) & Examples
 
-![Example - Robots Application](../pictures/strategy_example_robot_-_uml_class_diagram.gif)
+![Example - Robots Application](/pictures/strategy_example_robot_-_uml_class_diagram.gif)
 
 Let's consider an application used to simulate and study robots 
 interaction. For the begining a simple application is created to 
@@ -70,104 +71,105 @@ robot found,'George v.2.1' is really scared and run away in the opposite
 direction when it encounter another robot and 'R2' is prettey calm and 
 ignore any other robot. At some point the behaviours are changes for each 
 robot.
+
 ``` Java
 public interface IBehaviour {
-	public int moveCommand();
+    public int moveCommand();
 }
 
 public class AgressiveBehaviour implements IBehaviour{
-	public int moveCommand()
-	{
-		System.out.println("\tAgressive Behaviour: if find another robot attack it");
-		return 1;
-	}
+    public int moveCommand()
+    {
+        System.out.println("\tAgressive Behaviour: if find another robot attack it");
+        return 1;
+    }
 }
 
 public class DefensiveBehaviour implements IBehaviour{
-	public int moveCommand()
-	{
-		System.out.println("\tDefensive Behaviour: if find another robot run from it");
-		return -1;
-	}
+    public int moveCommand()
+    {
+        System.out.println("\tDefensive Behaviour: if find another robot run from it");
+        return -1;
+    }
 }
 
 public class NormalBehaviour implements IBehaviour{
-	public int moveCommand()
-	{
-		System.out.println("\tNormal Behaviour: if find another robot ignore it");
-		return 0;
-	}
+    public int moveCommand()
+    {
+        System.out.println("\tNormal Behaviour: if find another robot ignore it");
+        return 0;
+    }
 }
 
 public class Robot {
-	IBehaviour behaviour;
-	String name;
+    IBehaviour behaviour;
+    String name;
 
-	public Robot(String name)
-	{
-		this.name = name;
-	}
+    public Robot(String name)
+    {
+        this.name = name;
+    }
 
-	public void setBehaviour(IBehaviour behaviour)
-	{
-		this.behaviour = behaviour;
-	}
+    public void setBehaviour(IBehaviour behaviour)
+    {
+        this.behaviour = behaviour;
+    }
 
-	public IBehaviour getBehaviour()
-	{
-		return behaviour;
-	}
+    public IBehaviour getBehaviour()
+    {
+        return behaviour;
+    }
 
-	public void move()
-	{
-		System.out.println(this.name + ": Based on current position" +
-					 "the behaviour object decide the next move:");
-		int command = behaviour.moveCommand();
-		// ... send the command to mechanisms
-		System.out.println("\tThe result returned by behaviour object " +
-					"is sent to the movement mechanisms " + 
-					" for the robot '"  + this.name + "'");
-	}
+    public void move()
+    {
+        System.out.println(this.name + ": Based on current position" +
+                     "the behaviour object decide the next move:");
+        int command = behaviour.moveCommand();
+        // ... send the command to mechanisms
+        System.out.println("\tThe result returned by behaviour object " +
+                    "is sent to the movement mechanisms " + 
+                    " for the robot '"  + this.name + "'");
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 }
 
 
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		Robot r1 = new Robot("Big Robot");
-		Robot r2 = new Robot("George v.2.1");
-		Robot r3 = new Robot("R2");
+        Robot r1 = new Robot("Big Robot");
+        Robot r2 = new Robot("George v.2.1");
+        Robot r3 = new Robot("R2");
 
-		r1.setBehaviour(new AgressiveBehaviour());
-		r2.setBehaviour(new DefensiveBehaviour());
-		r3.setBehaviour(new NormalBehaviour());
+        r1.setBehaviour(new AgressiveBehaviour());
+        r2.setBehaviour(new DefensiveBehaviour());
+        r3.setBehaviour(new NormalBehaviour());
 
-		r1.move();
-		r2.move();
-		r3.move();
+        r1.move();
+        r2.move();
+        r3.move();
 
-		System.out.println("\r\nNew behaviours: " +
-				"\r\n\t'Big Robot' gets really scared" +
-				"\r\n\t, 'George v.2.1' becomes really mad because" +
-				"it's always attacked by other robots" +
-				"\r\n\t and R2 keeps its calm\r\n");
+        System.out.println("\r\nNew behaviours: " +
+                "\r\n\t'Big Robot' gets really scared" +
+                "\r\n\t, 'George v.2.1' becomes really mad because" +
+                "it's always attacked by other robots" +
+                "\r\n\t and R2 keeps its calm\r\n");
 
-		r1.setBehaviour(new DefensiveBehaviour());
-		r2.setBehaviour(new AgressiveBehaviour());
+        r1.setBehaviour(new DefensiveBehaviour());
+        r2.setBehaviour(new AgressiveBehaviour());
 
-		r1.move();
-		r2.move();
-		r3.move();
-	}
+        r1.move();
+        r2.move();
+        r3.move();
+    }
 }
 ```
 
@@ -178,6 +180,7 @@ Passing data to/from Strategy object
 Usually each startegy need data from the context have to return some 
 processed data to the context. This can be achieved in 2 ways.
 > creating some additional classes to encapsulate the specific data.
+>
 > passing the context object itself to the strategy objects. The strategy 
 object can set returning data directly in the context.
 
