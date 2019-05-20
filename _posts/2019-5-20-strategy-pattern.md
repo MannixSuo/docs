@@ -1,25 +1,23 @@
 ---
-title: Strategr Pattern
+title: Strategy Pattern
 layout: posts
 ---
 
-#Strategy Pattern
-
-##Motivation
+## Motivation
 
 There are common situations when classes differ only in their behavior.
 For this cases is a good idea to isolate the algorithms in separate classes
 in oreder to have the ability to select different algorithms at runtime.
 
-##Intent
+## Intent
 
 Define a family of algorithms , encapsulate each one ,and make them 
 interchangeable .Strategy lets the algorithm vary independently from 
 clients that use it .
 
-##Implementation
+## Implementation
 
-!()[pictures/strategy_implementation_-_uml_class_diagram.gif]
+!()[../pictures/strategy_implementation_-_uml_class_diagram.gif]
 
 **Strategy** - defines an interface common to all supported algorithms .
 **Context** uses this interface to call algorithms defined by a 
@@ -27,7 +25,7 @@ clients that use it .
 
 **ConcretStrategy** - each concrets starategy implements am algorithm.
 
-**Context**
+**Context:**
 
 > contains a reference to a strategy object.
 > may define a interface that lets strategy accessing its data.
@@ -45,7 +43,7 @@ only with the context.
 
 ## Applicability(适用性) & Examples
 
-!(Example - Robots Application)[picture/strategy_example_robot_-_uml_class_diagram.gif]
+!(Example - Robots Application)[../pictures/strategy_example_robot_-_uml_class_diagram.gif]
 
 Let's consider an application used to simulate and study robots 
 interaction. For the begining a simple application is created to 
@@ -71,7 +69,7 @@ robot found,'George v.2.1' is really scared and run away in the opposite
 direction when it encounter another robot and 'R2' is prettey calm and 
 ignore any other robot. At some point the behaviours are changes for each 
 robot.
-```Java
+``` Java
 public interface IBehaviour {
 	public int moveCommand();
 }
@@ -172,7 +170,7 @@ public class Main {
 }
 ```
 
-##Specific problems and implementation
+## Specific problems and implementation
 
 Passing data to/from Strategy object
 
@@ -220,6 +218,7 @@ a parameter (like a string) to the context asking to use a specific algorithm
 ,being totally decoupled of strategy classes.
 
 ## Strategy and Bridge
+
 Both of the patterns have the same UML diagram. But they differ in their 
 intent since the strategy is related with the behavior and bridge is for 
 structure. Further more, the coupling between the context and strategies 
