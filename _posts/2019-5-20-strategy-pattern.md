@@ -1,6 +1,7 @@
 ---
 title: Strategy Pattern
 layout: posts
+tags: design pattern
 ---
 
 ## Motivation
