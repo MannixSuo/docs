@@ -17,7 +17,7 @@ clients that use it .
 
 ## Implementation
 
-!()[../pictures/strategy_implementation_-_uml_class_diagram.gif]
+![strategy implementation](../pictures/strategy_implementation_-_uml_class_diagram.gif)
 
 **Strategy** - defines an interface common to all supported algorithms .
 **Context** uses this interface to call algorithms defined by a 
@@ -43,7 +43,7 @@ only with the context.
 
 ## Applicability(适用性) & Examples
 
-!(Example - Robots Application)[../pictures/strategy_example_robot_-_uml_class_diagram.gif]
+![Example - Robots Application](../pictures/strategy_example_robot_-_uml_class_diagram.gif)
 
 Let's consider an application used to simulate and study robots 
 interaction. For the begining a simple application is created to 
