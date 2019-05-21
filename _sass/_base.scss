@@ -1,0 +1,37 @@
+@import "base_color";
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+html {
+    background-color: $htmlBackgroundColor;
+    font-family: 'Press Start 2P', cursive;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2em;
+}
+
+h1,h2,h3,h4,body,p{
+    color: $baseFontColor;
+}
+
+pre ,blockquote{
+    padding-left: 10px;
+    border: 0.3em solid $borderColor;
+    background-color:$codeBackgroundColor;
+    margin: 0 auto;
+}
+.container {
+    margin: 0 auto;
+    width: 65%;
+}
+
+.language-Java{
+    font-family: consolas;
+}
+
+.post {
+    font-family: consolas;
+}
+
+
