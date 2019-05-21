@@ -30,7 +30,7 @@ Defines a one-to-many dependency between objects so that when one
 object changes state, all its dependents are notified and
 updated automatically.
 
-![observer_implementation]("/pictures/observer_implementation_-_uml_class_diagram.gif")
+![observer_implementation](/pictures/observer_implementation_-_uml_class_diagram.gif)
 
 Implementation
 
