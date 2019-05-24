@@ -1,6 +1,7 @@
 ---
 title: Decorator Pattern
 tags: designPattern
+layout: posts
 ---
 
 ## Motivation
