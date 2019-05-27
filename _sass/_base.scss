@@ -25,7 +25,6 @@ pre ,blockquote{
     margin: 0 auto;
     width: 65%;
     padding: 1%;
-    background-color: $postBackgroundColor;
 }
 
 .language-Java{
@@ -35,8 +34,10 @@ pre ,blockquote{
 .menu ul li {
     margin: 5%;
 }
+
 .post {
     font-family: consolas;
+    background-color: $postBackgroundColor;
 }
 
 
