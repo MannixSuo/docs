@@ -1,6 +1,6 @@
 ---
 title: Factory Method Pattern
-layouts: posts
+layout: posts
 tags: designPattern
 ---
 
@@ -43,37 +43,39 @@ at some extent. The Creator class specifies all standard and generic behavior of
 product is needed, it sends the creation details that are supplied by the client to the ConcreteCreator. Having
 this diagram in mind, it is easy for us now to product the code related to it. Here is how the implementation of
 the classic Factory method should look:
+
 ```java
+
 public interface Product {}
 
-public abstract class Creator 
+public abstract class Creator
 {
-	public void anOperation() 
-	{
-		Product product = factoryMethod();
-	}
-	
-	protected abstract Product factoryMethod();
+    public void anOperation()
+    {
+        Product product = factoryMethod();
+    }
+    protected abstract Product factoryMethod();
 }
 
 public class ConcreteProduct implements Product {}
 
-public class ConcreteCreator extends Creator 
+public class ConcreteCreator extends Creator
 {
-	protected Product factoryMethod() 
-	{
-		return new ConcreteProduct();
-	}
+    protected Product factoryMethod()
+    {
+        return new ConcreteProduct();
+    }
 }
 
-public class Client 
+public class Client
 {
-	public static void main( String arg[] ) 
-	{
-		Creator creator = new ConcreteCreator();
-		creator.anOperation();
-	}
+    public static void main( String arg[] ) 
+    {
+        Creator creator = new ConcreteCreator();
+        creator.anOperation();
+    }
 }
+
 ```
 
 ## Applicability & Examples
@@ -88,11 +90,11 @@ The need for implementing the Factory Method is very frequent. The cases are the
 
 Here are the benefits and drawbacks of factory pattern:
 
-* + The main reason for which the factory pattern is used is that it introduces a separation between the application and a family of classes(it introduces weak coupling instead of tight coupling hiding concrete classes from the application). It provides a simple way of extending the family of products with minor changes in application code.
+* The main reason for which the factory pattern is used is that it introduces a separation between the application and a family of classes(it introduces weak coupling instead of tight coupling hiding concrete classes from the application). It provides a simple way of extending the family of products with minor changes in application code.
 
-* + It provides customiztion hooks. When the objects are created directly inside the class it's hard to replace them by objects which extend their functionality. If a factory is used instead to create a family of objects the customized objects can easily repalce the original objects, configuring the factory to create them.
+* It provides customiztion hooks. When the objects are created directly inside the class it's hard to replace them by objects which extend their functionality. If a factory is used instead to create a family of objects the customized objects can easily repalce the original objects, configuring the factory to create them.
 
-* - The factory has to be used for a family of objects. If the classes doesn't extend common base class or interface they can not be used in a factory design template.
+* The factory has to be used for a family of objects. If the classes doesn't extend common base class or interface they can not be used in a factory design template.
 
 ## Hot points
 
@@ -103,5 +105,6 @@ When you design an application just think if you really need it a factory to cre
 ```java
 
 if (genericProduct typeof ConcreteProduct)
-	((ConcreteProduct)genericProduct).doSomeConcreteOperation();
+    ((ConcreteProduct)genericProduct).doSomeConcreteOperation();
+
 ```

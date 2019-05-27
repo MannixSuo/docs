@@ -1,5 +1,5 @@
 ---
-title: Bookes
+title: Bookes I'm Reading
 layout: posts
 ---
 

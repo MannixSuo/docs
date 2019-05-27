@@ -66,13 +66,12 @@ type of the object that should be created, as below:
 
 ```Java
 public class ProductFactory{
-	public Product createProduct(String ProductID){
-		if (id==ID1)
-			return new OneProduct();
-		if (id==ID2) return
-			return new AnotherProduct();
-		... // so on for the other Ids
-		
+    public Product createProduct(String ProductID){
+        if (id==ID1)
+            return new OneProduct();
+        if (id==ID2) return
+            return new AnotherProduct();
+        ... // so on for the other Ids
         return null; //if the id doesn't have any of the expected values
     }
     ...
@@ -120,7 +119,7 @@ a static constructor. Look at the example below:
 ```Java
 public static void main(String args[])
 {
-	Factory.instance().registerProduct("ID1", OneProduct.class);
+    Factory.instance().registerProduct("ID1", OneProduct.class);
 }
 ```
 
@@ -129,10 +128,10 @@ public static void main(String args[])
 ```Java
 class OneProduct extends Product
 {
-	static {
-		Factory.instance().registerProduct("ID1",OneProduct.class);
-	}
-	...
+    static {
+        Factory.instance().registerProduct("ID1",OneProduct.class);
+    }
+    ...
 }
 ```
 
@@ -147,22 +146,22 @@ be executed when each class is loaded:
 ```Java
 class Main
 {
-	static
-	{
-		try
-		{
-			Class.forName("OneProduct");
-			Class.forName("AnotherProduct");
-		}
-		catch (ClassNotFoundException any)
-		{
-			any.printStackTrace();
-		}
-	}
-	public static void main(String args[]) throws PhoneCallNotRegisteredException
-	{
-		...
-	}
+    static
+    {
+        try
+        {
+            Class.forName("OneProduct");
+            Class.forName("AnotherProduct");
+        }
+        catch (ClassNotFoundException any)
+        {
+            any.printStackTrace();
+        }
+    }
+    public static void main(String args[]) throws PhoneCallNotRegisteredException
+    {
+        ...
+    }
 }
 ```
 
@@ -190,7 +189,7 @@ we'll register concrete product objects instead of Class objects.
 abstract class Product
 {
     private product;
-	public abstract Product createProduct();
+    public abstract Product createProduct();
 
     public void first()
     {
@@ -198,25 +197,25 @@ abstract class Product
         // only the classes that implements createProduct() method knows
         product = createProduct();
     }
-	...
+    ...
 }
 
 class OneProduct extends Product
 {
-	public OneProduct createProduct()
-	{
-		return new OneProduct();
-	}
-	...
+    public OneProduct createProduct()
+    {
+        return new OneProduct();
+    }
+    ...
 }
 
 class AnotherProduct extends Product
 {
     public AnotherProduct createProduct()
-	{
-		return new AnotherProduct();
-	}
-	...
+    {
+        return new AnotherProduct();
+    }
+    ...
 }
 ```
 
@@ -235,16 +234,16 @@ see there the most intuitive solution to avoid modifying the Factory class is to
 This is the classic implementation of the factory method pattern. There are some drawbacks over the
 class registration implementation and not so many advantages:
 
-* + The derived factory method can be changed to perform additional operations when the objects are
+* The derived factory method can be changed to perform additional operations when the objects are
 created(maybe some initialization based on some global parameters ...)
 
-* - The factory can not be used as a singleton
+* The factory can not be used as a singleton
 
-* - Each factory has to be initialized before using it.
+* Each factory has to be initialized before using it.
 
-* - More difficult to implement.
+* More difficult to implement.
 
-* - If a new Object has to be added a new factory has to be created.
+* If a new Object has to be added a new factory has to be created.
 
 Anyway, this classic implementation has the advantage that it will help us understanding the Abstract
 Factory design pattern.
@@ -257,9 +256,10 @@ manipulate them mostly casted to abstract types, then you need a factory. If you
 following, you should reconsider it:
 
 ```java
-(if (ConcreteProduct)genericProduct typeof )
-	((ConcreteProduct)genericProduct).doSomeConcreteOperation();
+(if (genericProduct typeof ConcreteProduct)
+    ((ConcreteProduct)genericProduct).doSomeConcreteOperation();
 ```
+
 Please note that the procedural switch-case(noob) implementation is simplest, The only wise way to use it is for temporary modules until it is replaced with an real factory. Is it means that we should use factory to create
-objects only? I don't think so, if we do that our code will become very compliexited. Only if we know the object
-we created maybe changed then we use factory pattern.
+objects only? I don't think so, if we do that our code will become very complicated. Only if we know the object
+we created maybe changed in future then we use factory pattern.
