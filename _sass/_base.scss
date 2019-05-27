@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 
 html {
-    background-color: $htmlBackgroundColor;
     font-family: 'Press Start 2P', cursive;
     background-image: url(/assets/images/memphis-colorful.png)
 }
@@ -26,6 +25,7 @@ pre ,blockquote{
     margin: 0 auto;
     width: 65%;
     padding: 1%;
+    background-color: $postBackgroundColor;
 }
 
 .language-Java{
