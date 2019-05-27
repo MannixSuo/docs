@@ -25,12 +25,16 @@ pre ,blockquote{
 .container {
     margin: 0 auto;
     width: 65%;
+    padding: 1%;
 }
 
 .language-Java{
     font-family: consolas;
 }
 
+.menu ul li {
+    margin: 5%;
+}
 .post {
     font-family: consolas;
 }
