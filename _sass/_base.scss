@@ -15,6 +15,11 @@ h1,h2,h3,h4,body,p{
     color: $baseFontColor;
 }
 
+image{
+    width: 100%;
+    height: 100%;
+}
+
 pre ,blockquote{
     padding-left: 10px;
     border: 0.3em solid $borderColor;
