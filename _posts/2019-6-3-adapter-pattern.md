@@ -24,8 +24,11 @@ The figure below shows a UML class diagram for the Adapter Pattern:
 The classes/objects participating in adapter pattern:
 > **Tatget** - defines the domain-specific interface that
 > Client uses.
+>
 > **Adapter** - adapts the interface Adaptee to the Target interface.
+>
 > **Adaptee** - defines an existiong interface that needs adapting.
+>
 > **Client** - collaborates with objects conforming to the Target interface.
 
 ## Applicability & Examples
