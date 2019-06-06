@@ -155,3 +155,40 @@ var.each( new Functor() {
 ```
 
 The main idea is to pass the code to be executed to the collection. Then the collection will call internally the `doSomething` method on each of the componments. In C++ it's possible to send `doMethod` method as a pointer. In C#,.NET or VB.NET it is possible to send the method as a delegate. In java the `Functor` design pattern has to be used. The main idea is to create a base interface with only one method (`doSomething`). Then the method will be implemented in a class which implements the interface and the class will be passed to the collection to iterator. For more details see the `Functor` design pattern.
+
+### Who defines the traversal algorithm?
+
+The algorithm for traversing the aggregate can be implemented in the iterator or in the aggregate itself.
+When the traversal algorithm is defined in the aggregate, the iterator is used only to store the state of the iterator. This kind of iterator is called a cursor because it points to the current position in the aggregate.
+
+The other option is to implement the traversal algorithm in the iterator. This option offers certain advantages and some disadvantages. For example it is easier to implement different algorithms to reuse the same iterators on different aggregates and to subclass the iterator in order to change it's behavior. The main disadvantage is that the iterator will have to access internal members of the aggregate. In Java and .NET this can be done, without violating the encapsulation principle, by making the iterator an inner class of the aggregate class.
+
+### Robust Iterators
+
+Can the aggregate be moodified while a traversal is ongoing? An iterator that allows insertion and deletions without affecting the traversal and without making a copy of the aggregate is called a robust iterator. A robust iterator will make sure that when elements are added or removed from an aggregate during iteration elements are not accessed twice or ignore.
+
+Let's say we don't need a robust iterator. If the aggregare can not be modified (because the iteration is started), it should be made explicitly, meaning that the client should be aware of it. We can just return a false value what an element is added to the collection stating that the operation has failed, or we can throw an exception.
+
+an alternative solution is to add functions to change the aggregate in the iterator itself. For example we cam add the following methods to out iterator:
+
+```java
+bool remove();
+bool insertAfer();
+bool insertBefore();
+```
+
+In the case when this solution is chosen the iterator handles the changes of the aggregator. In this case the operation to change the iteration should be added to the iterator interface or base class not to the implementation only, in order to have a general mechanism for the entire application.
+
+### Mechanism provided by the programing language
+
+The iterator pattern can be implemented from scrach in Java or .NET, but there is already built-in support for Iterator Pattern.
+
+## Hot Spot
+
+* External vs. Internal Iterators - In languages like java ,c#,vb,.net,c++ is very easy to use external iterators.
+
+* Who defines the traversal algorithm? - The aggregate can implement it or the iterator as well. Usually the algorithm is defined in the iterator.
+
+* Robust Iterators - Can the aggregate be modified while a traversal is ongoing?
+
+* Multithreading Iterators - First of all multithreading iterators should be robust iterators. Second of all they should work in multithreading environments.
