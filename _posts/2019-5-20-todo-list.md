@@ -9,9 +9,9 @@ Thinking in Java
 
 代码整洁之道
 
-Head first 设计模式
-
 ## Readed
+
+2019-6 Head first 设计模式
 
 2019-5  The Elements of Computer Systems: Building a Modern Computer from First Principles
 
