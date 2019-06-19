@@ -31,6 +31,10 @@ pre ,blockquote{
     padding: 1%;
 }
 
+.center {
+    text-align: center;
+}
+
 .language-Java{
     font-family: consolas;
 }
@@ -45,4 +49,17 @@ pre ,blockquote{
     padding: 2%;
 }
 
+#indexMenu {
+    list-style: none;
+    position: relative;
+    font-size: 2em;
+}
+#header {
+    border-radius: 50%;
+}
+
+#indexMenu li {
+    margin: 2%;
+    color: brown;
+}
 

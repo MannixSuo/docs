@@ -10,16 +10,18 @@
   </head>
 
   <body>
+
     <header>
-      <div class="center">
-        <img  id="header" src="/assets/images/header.jpg">
+      <div class="container">
+        <h1>{{ site.title | default: site.github.repository_name }}</h1>
+        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
       </div>
     </header>
-
-    <menu id="indexMenu" class="center">
-        <li>About me</li>
-        <li>Books I'am Reading</li>
-        <li>Articles</li>
-    </menu>
+    <div class="container">
+      <section class="menu">
+        {{ content }}
+      </section>
+    </div>
+    
   </body>
 </html>
