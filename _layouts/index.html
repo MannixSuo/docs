@@ -9,17 +9,26 @@
     <link rel="icon" href="{{ '/assets/images/book.ico' | relative_url }}" type="image/x-icon">
   </head>
 
-  <body>
-    <header>
-      <div class="center">
-        <img  id="header" src="/assets/images/header.jpg">
-      </div>
-    </header>
+  <header>
+    <ul id="indexMenu">
+        <li>
+            <img  id="header" src="/assets/images/header.jpg">
+        </li>
+        <li>
+          <a href="">About me</a>
+        </li>
+        <li>
+          <a href="/assets/md/todo-list.html">Books I'am Reading</a>
+        </li>
+    </ul>
+  </header>
 
-    <menu id="indexMenu" class="center">
-        <li>About me</li>
-        <li>Books I'am Reading</li>
-        <li>Articles</li>
-    </menu>
+  <body>
+      <div class="container">
+          <section class="menu">
+            {{ content }}
+          </section>
+      </div>
   </body>
+
 </html>

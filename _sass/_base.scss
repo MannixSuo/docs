@@ -52,14 +52,20 @@ pre ,blockquote{
 #indexMenu {
     list-style: none;
     position: relative;
-    font-size: 2em;
+    font-size: 1em;
 }
 #header {
     border-radius: 50%;
+    width: 3%;
+    height: 3%;
 }
 
 #indexMenu li {
-    margin: 2%;
+    margin: 0.5%;
     color: brown;
+    display: inline;
+}
+#indexMenu li a{
+    text-decoration: none;
 }
 
