@@ -9,26 +9,19 @@
     <link rel="icon" href="{{ '/assets/images/book.ico' | relative_url }}" type="image/x-icon">
   </head>
 
-  <header>
-    <ul id="indexMenu">
-        <li>
-            <img  id="header" src="/assets/images/header.jpg">
-        </li>
-        <li>
-          <a href="">About me</a>
-        </li>
-        <li>
-          <a href="/assets/md/todo-list.html">Books I'am Reading</a>
-        </li>
-    </ul>
-  </header>
-
   <body>
-      <div class="container">
-          <section class="menu">
-            {{ content }}
-          </section>
-      </div>
-  </body>
 
+    <header>
+      <div class="container">
+        <h1>{{ site.title | default: site.github.repository_name }}</h1>
+        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+      </div>
+    </header>
+    <div class="container">
+      <section class="menu">
+        {{ content }}
+      </section>
+    </div>
+    
+  </body>
 </html>
