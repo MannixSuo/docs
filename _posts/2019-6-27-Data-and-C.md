@@ -47,3 +47,212 @@ int a=10,b;这样声明很不好
 0X 或0x表示16进制数如0x10,0X10
 
 0前缀表示8进制。
+
+不同的进制要使用不同的转换说明：
+
+|进制|转换说明|显示前缀(0,0x,0X)|
+|--|--|--|--|
+|十进制|%d|无|
+|八进制|%o|%#o|
+|十六进制|%x|%#x，或%#X|
+
+C语言提供三个附属关键字修饰基本整数类型：short，long，和unsigned
+
+* short int (或者简写为short)类型占用的存储空间可能比int类型少，常用于较小数值的场合以节省空间。与int类似，short是有符号类型。
+
+* long int或long 占用的存储空间可能比int多，适用于较大数值的场合。long是有符号类型。
+
+* long long int 或long long (C99标准加入)占用的存储空间可能比long多，该类型最少占用64位。有符号。
+
+* unsigned int 或unsigned 只适用于非负值的场合，这种类型与有符号类型表示的范围不同。例如16位unsigned int 允许的取值范围是0~65535而不是-32768~32767.用于表示正负号的位现在用来表示另一个二进制位，所以无符号整形可以表示更大的数。
+
+* 在C90标准中添加了unsigned long int或unsigned long，和unsigned int 或unsigned short类型。C99标准又添加了unsigned long long int 或unsigned long long。
+
+* 在任何有符号类型前面添加关键字signed，可强调使用有符号类型的意图。
+
+### 复习题
+
+1. 指出下面各种数据合适的数据类型
+    1. East Simpleton的人口(unsigned long)
+    2. DVD影碟的价格(unsigned float)
+    3. 本章出现次数最多的字母(char)
+    4. 本章出现次数最多的字母次数(unsigned int)
+
+2. 在什么情况下要用long类型的变量代替int类型的变量？
+    > 数字超出int的范围
+
+3. 使用那些可移植的数据类型可以获得32位有符号整数？选择的理由是什么？
+    > int32_t 确保不同的类型在系统中的功能一致。
+
+4. 指出下列常量的类型和含义
+    1. '\b'  转义字符 backspace
+    2. 106  int 106
+    3. 99.44    float 99.44
+    4. 0XAA int 16进制
+    5. 2.0e30   float 2*10^30
+
+5. Dottie Cawm编写了一个程序找出程序中的错误。
+
+    ```c
+    #include <stdio.h>
+    int main(void)
+    {
+        float g,h;
+        float tax,rate;
+        rate = 1.0;
+        g = 1.0e21;
+        tax = rate*g;
+        return 0;
+    }
+    ```
+
+6. 写出下列常量在声明中使用的数据类型在printf()中对应的转换说明。
+
+    |常量|类型|转换说明|
+    |--|--|--|
+    |12|int|%d|
+    |0X3|int|%#X,%d|
+    |'C'|char|%c|
+    |2.34E07|float|%f|
+    |'\040'|char|%c|
+    |7.0|float|%f|
+    |6L|long|%ld|
+    |6.0f|float|%f|
+    |0x5.b6p12|float|%f|(5+11/16+6/256)*2^12
+
+7. 写出下列常量在声明中使用的数据类型和在printf()中对应的转换说明。(假设int为16位)
+
+    |常量|类型|转换说明|
+    |--|--|--|
+    |012|int|%#o|
+    |2.9e05L|long|%ld|
+    |'s'|char|%c|
+    |100000|int|%d|
+    |'\n'|char|%c|
+    |20.0f|float|%f|
+    |0x44|int|%#x|
+    |-40|int|%d|
+
+8. 假设程序的开头有下列声明：
+
+    ```c
+    int imate = 2;
+    long shot = 53456;
+    char grade = 'A';
+    float log = 2.71828;
+    ```
+
+    把下面的printf()语句中的转换字符补充完整
+
+    ```c
+    printf("The odds against the %d were %ld to 1.\n",imate,shot)
+    printf("A score of %f is not an %c grade.\n",log,grade)
+    ```
+
+9. 假设ch是char类型的变量，分别使用转义序列，十进制值，八进制字符常量和十六进制字符常量把回车字符赋给ch(假设使用ASCII码值)
+
+    转义序列：'\r',十进制值：13，八进制符号常量：'\015',十六进制符号常量：'0XD'
+
+10. 修正下面的程序。
+
+    ```C
+    #include <stdio.h>
+    int main(void) /* This program is perfect*/
+    {
+        int cows,legs;
+        printf("How many cow legs did you count?\n");
+        scanf("%d",&legs);
+        cows = legs/4;
+        printf("That implies there are %d cows.\n",cows);
+        return 0;
+    }
+    ```
+
+11. 支持下列转义序列的含义
+    1. \n  换行
+    2. \\  \
+    3. \"  双引号
+    4. \t  tab
+
+### 编程练习
+
+1. 通过实验即编写带有此类问题的程序验证整数上溢，浮点数上溢和浮点数下溢。
+
+    ```C
+    #include <stdio.h>
+    int main(void)
+    {
+        int a = 4294967295;
+        printf("%d\n",a); // -1
+        float toobig = 3.4E38 * 100.0f;
+        printf("%e\n",toobig);// inf
+        float down = 0.123456;
+        printf("%f,%f",down,down/100000);// 0.123456,0.00001
+        return 0;
+    }
+    ```
+
+2. 编写一个程序，要求提示输入一个ASCII码值，然后打印输入的字符。
+
+    ```C
+    #include <stdio.h>
+    int main(void)
+    {
+        int ascii = 0;
+        printf("Enter a ASCII number: ");
+        scanf("%d",&ascii);
+        printf("The character of this ASCII is %c .\n",ascii);
+    }
+    ```
+
+3. 编写一个程序，发出一声警报，然后打印下面的文本。
+    > Startled by the sudden sound, Sally shouted,
+    > "By the Great Pumpkin, what was that!"
+
+    ```C
+    #include <stdio.h>
+    int main(void)
+    {
+        printf("\a");
+        printf("Startled by the sudden sound, Sally shouted,\n");
+        printf("\"By the Great Pumpkin, what was that!\"");
+    }
+    ```
+
+4. 编写一个程序，读取一个浮点数，先打印成小数点的形式，在打印成指数形式，然后如果系统支持在打印成p计数法，按以下格式输出。
+    > Enter a floating-point value :64.25
+    >
+    >fixed-point notation:64.25000
+    >
+    >exponential notation:6.425000E+01
+    >
+    >p notation 0x1.01p+6
+
+    ```C
+    #include <stdio.h>
+    int main(void)
+    {
+        float value = 0.0;
+        printf("Enter a floating-point value :");
+        scanf("%f",&value);
+        printf("fixed-point notation: %f\n",value);
+        printf("exponential notation: %e\n",value);
+        printf("fixed-point notation: %a\n",value);
+    }
+    ```
+
+5. 一年大约有3.156X10^7秒。编写一个程序提示用户输入年龄，然后显示该年龄对应的秒数。
+
+    ```C
+    #include <stdio.h>
+    int main(void)
+    {
+        long secondsAnYear = 3.156E7;
+        short age;
+        printf("Your age:");
+        scanf("%hd",&age);
+        printf("Seconds for your age: %ld \n",age * secondsAnYear);
+        return 0;
+    }
+    ```
+
