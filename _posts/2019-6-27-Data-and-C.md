@@ -75,23 +75,24 @@ C语言提供三个附属关键字修饰基本整数类型：short，long，和u
 ### 复习题
 
 1. 指出下面各种数据合适的数据类型
-    1. East Simpleton的人口(unsigned long)
+    1. East Simpleton的人口(int)
     2. DVD影碟的价格(unsigned float)
     3. 本章出现次数最多的字母(char)
     4. 本章出现次数最多的字母次数(unsigned int)
 
 2. 在什么情况下要用long类型的变量代替int类型的变量？
     > 数字超出int的范围
+    > 如果要处理更大的值那么使用一种在所有系统上都保证至少32位的类型可以提高程序的可移植性。
 
 3. 使用那些可移植的数据类型可以获得32位有符号整数？选择的理由是什么？
-    > int32_t 确保不同的类型在系统中的功能一致。
+    > 如果要正好获得32位的整数，可以使用int32_t,如果要获取最少可存储32位整数的最小类型，可以使用int_least_32_t类型，如果要为32位提供最快的计算速度，可以选用int_fast32_t类型。
 
 4. 指出下列常量的类型和含义
-    1. '\b'  转义字符 backspace
+    1. '\b'  char(存储为int类型) 转义字符 backspace
     2. 106  int 106
-    3. 99.44    float 99.44
+    3. 99.44    double 99.44
     4. 0XAA int 16进制
-    5. 2.0e30   float 2*10^30
+    5. 2.0e30   double 2*10^30
 
 5. Dottie Cawm编写了一个程序找出程序中的错误。
 
@@ -101,7 +102,7 @@ C语言提供三个附属关键字修饰基本整数类型：short，long，和u
     {
         float g,h;
         float tax,rate;
-        rate = 1.0;
+
         g = 1.0e21;
         tax = rate*g;
         return 0;
@@ -113,26 +114,26 @@ C语言提供三个附属关键字修饰基本整数类型：short，long，和u
     |常量|类型|转换说明|
     |--|--|--|
     |12|int|%d|
-    |0X3|int|%#X,%d|
+    |0X3|int|%#X|
     |'C'|char|%c|
-    |2.34E07|float|%f|
+    |2.34E07|double|%e|
     |'\040'|char|%c|
-    |7.0|float|%f|
+    |7.0|double|%f|
     |6L|long|%ld|
     |6.0f|float|%f|
-    |0x5.b6p12|float|%f|(5+11/16+6/256)*2^12
+    |0x5.b6p12|float|%a|(5+11/16+6/256)*2^12
 
 7. 写出下列常量在声明中使用的数据类型和在printf()中对应的转换说明。(假设int为16位)
 
     |常量|类型|转换说明|
     |--|--|--|
     |012|int|%#o|
-    |2.9e05L|long|%ld|
+    |2.9e05L|long double|%le|
     |'s'|char|%c|
-    |100000|int|%d|
+    |100000|long|%ld|
     |'\n'|char|%c|
     |20.0f|float|%f|
-    |0x44|int|%#x|
+    |0x44|int|%x|
     |-40|int|%d|
 
 8. 假设程序的开头有下列声明：
