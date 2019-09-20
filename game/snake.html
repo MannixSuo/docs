@@ -95,7 +95,7 @@
         console.log("head");
         ctx.fillStyle = "red";
         ctx.beginPath();
-        ctx.arc(head.x*10+5,head.y*10+5,5,0,Math.PI*2,true);
+        ctx.arc((head.x%50)*10+5,(head.y%50)*10+5,5,0,Math.PI*2,true);
         ctx.fill();
     }
 
@@ -112,7 +112,7 @@
     function drawNode(node,color)
     {
         ctx.fillStyle = color;
-        ctx.fillRect(node.x*10,node.y*10,10,10);
+        ctx.fillRect((node.x%50)*10,(node.y%50)*10,9,9);
     }
 
     function move(keyCode)
@@ -142,17 +142,17 @@
         }
         tail.x = nextX;
         tail.y = nextY;
-        tail.next = head;
-        newHead = tail;
-        if(tail.pre != null)
+        if(len>1)
         {
+            tail.pre = null;
+            tail.next = head;
+            newHead = tail;
             tailPre = tail.pre;
             tailPre.next = null;
-            tail.pre = null;
+            head.pre = newHead;
+            head = newHead;
             tail = tailPre;
         }
-        head.pre = newHead;
-        head = newHead;
         //eat
         if(food.x == head.x && food.y == head.y)
         {
@@ -163,12 +163,30 @@
             len++;
         }
         draw();
+        isAlive();
+    }
+
+    function isAlive()
+    {
+        current = head.next;
+        while(current != null)
+        {
+            // eat itself
+            if(current.x == head.x && current.y == head.y)
+            {
+                console.log("eat itself");
+                alive = false;
+                return;
+            }
+            current = current.next;
+        }
     }
 
     function beginGame()
     {
         setInterval("move(keyCode)",100);
     }
+
 
     </script>
 </html>
