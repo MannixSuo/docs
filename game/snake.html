@@ -8,15 +8,19 @@
     </style>
     <body>
         <input type="button" value="Start" onclick="beginGame()"/>
-        <canvas id="myCanvas" width="500" height="500"></canvas>
+        <canvas id="myCanvas"></canvas>
         <input type="button" value="Stop" onclick="stop()"/>
     </body>
     <script>
+    var bgHeight = 20;
+    var bgWidth = 20;
+    var snakeSize = 30;
     var myCanvas = document.getElementById("myCanvas");
+    myCanvas.setAttribute("width",bgWidth*(snakeSize+1));
+    myCanvas.setAttribute("height",bgHeight*(snakeSize+1));
     var ctx = myCanvas.getContext("2d");
-    var height = 50;
-    var width = 50;
-    var head = new Node(parseInt(Math.random()*50),parseInt(Math.random()*50),null,null);
+    
+    var head = new Node(parseInt(Math.random()*bgWidth),parseInt(Math.random()*bgHeight),null,null);
     var tail = head;
     var len = 1;
     var food;
@@ -40,24 +44,27 @@
 
     function generateFood()
     {
-        food = new Node(parseInt(Math.random()*50),parseInt(Math.random()*50),null,null);
+        food = new Node(parseInt(Math.random()*bgWidth),parseInt(Math.random()*bgHeight),null,null);
     }
 
     function draw()
     {
-        ctx.clearRect(0,0,500,500);
+        ctx.clearRect(0,0,bgWidth*snakeSize,bgHeight*snakeSize);
         console.log("drawing..");
         // tab
-        for(i=0;i<=height;i++)
+        for(i=0;i<=bgHeight;i++)
         {
             ctx.strokeStyle = "#ccc" ;
             ctx.beginPath();
-            ctx.moveTo(0,i*10);
-            ctx.lineTo(500,i*10);
-
-            ctx.moveTo(i*10,0);
-            ctx.lineTo(i*10,500);
-            ctx.stroke();
+            ctx.moveTo(0,i*snakeSize);
+            ctx.lineTo(bgWidth*snakeSize,i*snakeSize);
+        }
+        for(i=0;i<bgWidth;i++)
+        {
+            ctx.strokeStyle = "#ccc" ;
+            ctx.beginPath();
+            ctx.moveTo(i*snakeSize,0);
+            ctx.lineTo(i*snakeSize,bgHeight*snakeSize);
         }
         // food
         drawNode(food,"yellow");
@@ -83,19 +90,27 @@
             current = current.next;
             i++;
         }
-
+        drawScore();
     }
+
+    function drawScore()
+    {
+        ctx.font="10px Georgia";
+        ctx.fillText("Your Score : " + len, bgWidth*(snakeSize-2) ,snakeSize+3,snakeSize);
+    }
+
     function drawTail(node)
     {
-        drawNode(node,"black");
+        drawNode(node,"blue");
     }
 
     function drawHead(head)
     {
+        var size = snakeSize/2;
         console.log("head");
         ctx.fillStyle = "red";
         ctx.beginPath();
-        ctx.arc((head.x%50)*10+5,(head.y%50)*10+5,5,0,Math.PI*2,true);
+        ctx.arc(head.x*snakeSize + size,head.y*snakeSize+size,size,0,Math.PI*2,true);
         ctx.fill();
     }
 
@@ -112,7 +127,7 @@
     function drawNode(node,color)
     {
         ctx.fillStyle = color;
-        ctx.fillRect((node.x%50)*10,(node.y%50)*10,9,9);
+        ctx.fillRect((node.x)*snakeSize,(node.y)*snakeSize,snakeSize,snakeSize);
     }
 
     function move(keyCode)
@@ -142,12 +157,12 @@
         }
         tail.x = nextX;
         tail.y = nextY;
-        if(len>1)
+        if(len > 1)
         {
+            tailPre = tail.pre;
             tail.pre = null;
             tail.next = head;
             newHead = tail;
-            tailPre = tail.pre;
             tailPre.next = null;
             head.pre = newHead;
             head = newHead;
@@ -162,8 +177,8 @@
             generateFood();
             len++;
         }
-        draw();
         isAlive();
+        draw();
     }
 
     function isAlive()
@@ -180,11 +195,15 @@
             }
             current = current.next;
         }
+        if(head.x<0)head.x = bgWidth * snakeSize + head.x;
+        if(head.y<0)head.y = bgHeight * snakeSize + head.y;
+        if(head.x>bgWidth) head.x = head.x % bgWidth;
+        if(head.y>bgHeight) head.y = head.y % bgHeight;
     }
 
     function beginGame()
     {
-        setInterval("move(keyCode)",100);
+        setInterval("move(keyCode)",200);
     }
 
 
