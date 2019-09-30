@@ -1,40 +1,44 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>snake</title>
-    </head>
-    <style>
-    </style>
-    <body>
-        <input type="button" value="Start" onclick="beginGame()"/>
-        <canvas id="myCanvas"></canvas>
-        <input type="button" value="Stop" onclick="stop()"/>
-    </body>
-    <script>
+
+<head>
+    <meta charset="utf-8">
+    <title>snake</title>
+</head>
+<style>
+</style>
+
+<body>
+    <input type="button" value="Start" onclick="beginGame()" />
+    <canvas id="myCanvas"></canvas>
+    <input type="button" value="Stop" onclick="stop()" />
+</body>
+<script>
     var bgHeight = 20;
     var bgWidth = 20;
-    var snakeSize = 30;
+
+    var gameHeight = 30;
+    var gameWidth = 30;
+
+    var dotSize = 10;
+
     var myCanvas = document.getElementById("myCanvas");
-    myCanvas.setAttribute("width",bgWidth*(snakeSize+1));
-    myCanvas.setAttribute("height",bgHeight*(snakeSize+1));
+    myCanvas.setAttribute("width", gameWidth * dotSize);
+    myCanvas.setAttribute("height", gameHeight * dotSize);
     var ctx = myCanvas.getContext("2d");
-    
-    var head = new Node(parseInt(Math.random()*bgWidth),parseInt(Math.random()*bgHeight),null,null);
+
+    var head = new Node(parseInt(Math.random() * bgWidth), parseInt(Math.random() * bgHeight), null, null);
     var tail = head;
     var len = 1;
     var food;
     var alive = true;
     var keyCode;
-    var tailPre,newHead;
+    var tailPre, newHead;
     var i;
     var current;
     generateFood();
 
-    console.log(" x: "+head.x+" y: "+head.y);
-
-    function Node(x,y,pre,next)
-    {
+    function Node(x, y, pre, next) {
         this.x = x;
         this.y = y;
         this.pre = pre;
@@ -42,113 +46,106 @@
         return this;
     }
 
-    function generateFood()
-    {
-        food = new Node(parseInt(Math.random()*bgWidth),parseInt(Math.random()*bgHeight),null,null);
+    function generateFood() {
+        food = new Node(parseInt(Math.random() * bgWidth), parseInt(Math.random() * bgHeight), null, null);
     }
 
-    function draw()
-    {
-        ctx.clearRect(0,0,bgWidth*snakeSize,bgHeight*snakeSize);
-        console.log("drawing..");
+    function drawBasicGame() {
+        for (i = 0; i < gameHeight; i++) {
+            ctx.strokeStyle = "blue";
+            if (i == bgHeight + 1) ctx.strokeStyle = "black";
+            ctx.beginPath();
+            ctx.moveTo(0, i * dotSize);
+            ctx.lineTo(gameWidth * dotSize, i * dotSize);
+            ctx.stroke();
+        }
+
+        for (i = 0; i < gameWidth; i++) {
+            ctx.strokeStyle = "blue";
+            if (i == bgWidth + 1) ctx.strokeStyle = "black";
+            ctx.beginPath();
+            ctx.moveTo(i * dotSize, 0);
+            ctx.lineTo(i * dotSize, gameHeight * dotSize);
+            ctx.stroke();
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, gameWidth * dotSize, gameHeight * dotSize);
         // tab
-        for(i=0;i<=bgHeight;i++)
-        {
-            ctx.strokeStyle = "#ccc" ;
-            ctx.beginPath();
-            ctx.moveTo(0,i*snakeSize);
-            ctx.lineTo(bgWidth*snakeSize,i*snakeSize);
-        }
-        for(i=0;i<bgWidth;i++)
-        {
-            ctx.strokeStyle = "#ccc" ;
-            ctx.beginPath();
-            ctx.moveTo(i*snakeSize,0);
-            ctx.lineTo(i*snakeSize,bgHeight*snakeSize);
-        }
+        drawBasicGame();
+        drawScore();
         // food
-        drawNode(food,"yellow");
+        drawNode(food, "yellow");
         // head
         // body
         current = head;
         i = 0;
-        while(current != null && i<len)
-        {
-            if(i==0)
-            {
+        while (current != null && i < len) {
+            if (i == 0) {
                 drawHead(current);
-            }
-            else if(i==len-1)
-            {
+            } else if (i == len - 1) {
                 drawTail(current);
+            } else {
+                drawNode(current, "black")
             }
-            else
-            {
-                drawNode(current,"black")
-            }
-            console.log("draw"+len);
+            console.log("draw" + len);
             current = current.next;
             i++;
         }
-        drawScore();
     }
 
-    function drawScore()
-    {
-        ctx.font="10px Georgia";
-        ctx.fillText("Your Score : " + len, bgWidth*(snakeSize-2) ,snakeSize+3,snakeSize);
+    function drawScore() {
+        ctx.fillStyle = "black";
+        ctx.textBaseline = "bottom";
+        ctx.font = "30px Consolas";
+        ctx.fillText("Score :", bgWidth * dotSize, 3 * dotSize);
+        ctx.fillText(len, (bgWidth + 1) * dotSize, 6 * dotSize);
     }
 
-    function drawTail(node)
-    {
-        drawNode(node,"blue");
+    function drawTail(node) {
+        drawNode(node, "blue");
     }
 
-    function drawHead(head)
-    {
-        var size = snakeSize/2;
+    function drawHead(head) {
+        var size = dotSize / 2;
         console.log("head");
         ctx.fillStyle = "red";
         ctx.beginPath();
-        ctx.arc(head.x*snakeSize + size,head.y*snakeSize+size,size,0,Math.PI*2,true);
+        ctx.arc(head.x * dotSize + size, head.y * dotSize + size, size, 0, Math.PI * 2, true);
         ctx.fill();
     }
 
-    document.onkeydown = function(e)
-    {
+    document.onkeydown = function (e) {
         keyCode = e.keyCode;
     }
 
-    function stop()
-    {
+    function stop() {
         this.alive = false;
     }
 
-    function drawNode(node,color)
-    {
+    function drawNode(node, color) {
         ctx.fillStyle = color;
-        ctx.fillRect((node.x)*snakeSize,(node.y)*snakeSize,snakeSize,snakeSize);
+        ctx.fillRect((node.x) * dotSize, (node.y) * dotSize, dotSize, dotSize);
     }
 
-    function move(keyCode)
-    {
+    function move(keyCode) {
         var nextX = head.x;
         var nextY = head.y;
-        switch(keyCode)
-        {
+        switch (keyCode) {
             // down
             case 40:
                 nextY++;
                 break;
-            // right
+                // right
             case 39:
                 nextX++;
                 break;
-            //up
+                //up
             case 38:
                 nextY--;
                 break;
-            //left
+                //left
             case 37:
                 nextX--;
                 break;
@@ -157,8 +154,7 @@
         }
         tail.x = nextX;
         tail.y = nextY;
-        if(len > 1)
-        {
+        if (len > 1) {
             tailPre = tail.pre;
             tail.pre = null;
             tail.next = head;
@@ -169,8 +165,7 @@
             tail = tailPre;
         }
         //eat
-        if(food.x == head.x && food.y == head.y)
-        {
+        if (food.x == head.x && food.y == head.y) {
             tail.next = food;
             food.pre = tail;
             tail = food;
@@ -181,31 +176,26 @@
         draw();
     }
 
-    function isAlive()
-    {
+    function isAlive() {
         current = head.next;
-        while(current != null)
-        {
+        while (current != null) {
             // eat itself
-            if(current.x == head.x && current.y == head.y)
-            {
+            if (current.x == head.x && current.y == head.y) {
                 console.log("eat itself");
                 alive = false;
                 return;
             }
             current = current.next;
         }
-        if(head.x<0)head.x = bgWidth * snakeSize + head.x;
-        if(head.y<0)head.y = bgHeight * snakeSize + head.y;
-        if(head.x>bgWidth) head.x = head.x % bgWidth;
-        if(head.y>bgHeight) head.y = head.y % bgHeight;
+        if (head.x < 0) head.x = bgWidth + head.x;
+        if (head.y < 0) head.y = bgHeight + head.y;
+        if (head.x > bgWidth) head.x = head.x % bgWidth - 1;
+        if (head.y > bgHeight) head.y = head.y % bgHeight - 1;
     }
 
-    function beginGame()
-    {
-        setInterval("move(keyCode)",200);
+    function beginGame() {
+        setInterval("move(keyCode)", 200);
     }
+</script>
 
-
-    </script>
 </html>
