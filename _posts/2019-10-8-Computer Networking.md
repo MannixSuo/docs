@@ -19,7 +19,7 @@ tags: computer network
             * if a source end system or a packet switch is sending a packet of **L** bits over a link with transmission rate **R** bits/sec, then the time to transmit the packet is **L/R** seconds.
             * Most packet switches use **store-and-forward** transmission at the inputs to the links.
             * Only after the router has received **all** of the packet’s **bits** can it begin to transmit (i.e., “forward”) the packet onto the outbound link.
-            * sending one packet from source to destination over a path consisting of **N** links each of rate **R** (thus, there are *N-1* routers between source and destination). Applying the same logic as above, we see that the end-to-end delay is : $ d_{\mbox{end-to-end}} = N{{L}\over{R}}$
+            * sending one packet from source to destination over a path consisting of **N** links each of rate **R** (thus, there are *N-1* routers between source and destination). Applying the same logic as above, we see that the end-to-end delay is : ${d_{\mbox{end-to-end}} = N{{L}\over{R}}}$
 
             Queuing Delays and Packet Loss
 
