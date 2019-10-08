@@ -11,6 +11,12 @@ Thinking in Java
 
 ## Readed
 
+2019-8 活着、许三观卖血计
+
+2019-7 三体-黑暗森林
+
+2019-7 三体-地球往事
+
 2019-6 Head first 设计模式
 
 2019-5  The Elements of Computer Systems: Building a Modern Computer from First Principles
