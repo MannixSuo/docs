@@ -1,7 +1,7 @@
 ---
 title: Computer Networking A Top Down Approach
 layout: posts
-tags: computer network
+tags: computer_network
 ---
 
 1. Computer Networks and the Internet
