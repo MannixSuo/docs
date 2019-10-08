@@ -32,6 +32,18 @@ tags: computer network
             * We now invite you to get your hands dirty by interacting with the Traceroute program. Simply visit the site www.traceroute.org, choose a source in a particular country, and trace the route from that source to your computer.
 
         2. Circuit Switching
+            * In circuit-switched networks, the resources needed along a path (buffers, link transmission rate) to provide for communication between the end systems are reserved for the duration of the communication session between the end systems.
+
+            Multiplexing in Circuit-Switched Networks
+
+            * the link dedicates a frequency band to each connection for the duration of the connection. In telephone networks, this frequency band typically has a width of 4 kHz (that is, 4,000 hertz or 4,000 cycles per second). The width of the band is called, not surprisingly, the bandwidth.
+
+            Packet Switching Versus Circuit Switching
+
+            * packet switching is more efficient.
+            * packet switching is not suitable for real-time services due to end-to-end delays.
+            * Circuit switching pre-allocates use of the transmission link regardless of demand, with allocated but unneeded link time going unused.
+            * unused. Packet switching on the other hand allocates link use on demand.
 
         3. A Network of Networks
 
