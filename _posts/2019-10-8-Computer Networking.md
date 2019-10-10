@@ -77,13 +77,33 @@ use_math: true
 
             * **Queuing Delay** At the queue, the packet experiences a queuing delay as it waits to be transmitted onto the link. The length of the queuing delay of a specific packet will depend on the number of earlier-arriving packets that are queued and waiting for transmission onto the link. Queuing delays can be on the order of microseconds to milliseconds in practice.
 
-            * **Transmission Delay** 
+            * **Transmission Delay** packets are transmitted in a **first-come-first-served** manner, as is common in packet-switched networks, our packet can be transmitted only after all the packets that have arrived before it have been transmitted. Denote the length of the packet by **L** bits, and denote the transmission rate of the link from router A to router B by **R** bits/sec.The transmission delay is **L/R**. Transmission delays are typically on the order of microseconds to milliseconds in practice.
+
+            * **Propagation Delay** Once a bit is pushed into the link, it needs to propagate to router B. The time required to propagate from the beginning of the link to router B is the propagation delay. The propagation delay is **d/s**, where **d** is the distance between router A and router B and **s** is the propagation speed of the link. In wide-area networks, propagation delays are on the order of milliseconds.
+
+            Comparing Transmission and Propagation Delay
+
+            * The transmission delay is the amount of time required for the router to push out the packet; *it is a function of the packet’s length and the transmission rate of the link, but has nothing to do with the distance between the two routers*. The propagation delay, on the other hand, is the time it takes a bit to propagate from one router to the next; *it is a function of the distance between the two routers, but has nothing to do with the packet’s length or the transmission rate of the link.*
+            * If we let $d_\mbox{proc}, d_\mbox{queue}, d_\mbox{trans}, d_\mbox{prop}$ denote the processing, queuing, transmission, and propagation delays, then the total nodal delay is given by
+
+                $d_\mbox{nodal} = d_\mbox{proc} + d_\mbox{queue} + d_\mbox{trans} + d_\mbox{prop}$
 
         2. Queuing Dealy And Packet Loss
+
+            Let **a** denote the average rate at which packets arrive at the queue (a is in units of packets/sec). Recall that **R** is the transmission rate; that is, it is the rate (in bits/sec) at which bits are pushed out of the queue. Also suppose, for simplicity, that all packets consist of L bits. Then the average rate at which bits arrive at the queue is La bits/sec. Finally, assume that the queue is very big, so that it can hold essentially an infinite number of bits. The ratio **La/R**, called the **traffic intensity**, often plays an important role in estimating the extent of the queuing delay.
+
+            * If La/R > 1,then the average rate at which bits arrive at the queue exceeds the rate at which the bits can be transmitted from the queue.
+
+            * La/R ≤ 1. Here, the nature of the arriving traffic impacts the queuing delay. For example, if packets arrive periodically—that is, one packet arrives every L/R seconds—then every packet will arrive at an empty queue and there will be no queuing delay. On the other hand, if packets arrive in bursts but periodically, there can be a significant average queuing delay.
+
+            Packet Loss
+
+            * In reality a queue preceding a link has finite capacity, Because the queue capacity is finite, packet delays do not really approach infinity as the traffic intensity approaches 1. Instead, a packet can arrive to find a full queue. With no place to store such a packet, a router will drop that packet; that is, the packet will be lost. a lost packet may be *retransmitted* on an end-to-end basis in order to ensure that all data are eventually transferred from source to destination
 
         3. End-to-End Delay
 
         4. Throughput in Computer Networks
+
     5. Protocol Layers And Their Service Models
         1. Layered Architecture
         2. Encapsulation
