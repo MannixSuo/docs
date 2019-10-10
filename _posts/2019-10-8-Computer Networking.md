@@ -102,12 +102,31 @@ use_math: true
 
         3. End-to-End Delay
 
+            * Suppose there are N - 1 routers between the source host and the destination host. Let’s also suppose for the moment that the network is uncongested (so that queuing delays are negligible), the processing delay at each router and at the source host is $d_\mbox{proc}$, the transmission rate out of each router and out of the source host is R bits/sec, and the propagation on each link is $d_\mbox{prop}$. The nodal delays accumulate and give an end-to-end delay, $d_\mbox{end-end} = N (d_\mbox{proc} + d_\mbox{trans} + d_\mbox{prop})$
+
+            Traceroute
+
+            * RFC 1393 describes Traceroute in detail.
+
+            * [PingPlotter](https://www.pingplotter.com/download)
+
+            End System, Application, and Other Delays
+            * WiFi or cable modem scenario may purposefully delay its transmission as part of its protocol for sharing the medium with other end systems.
+            * In VoIP, the sending side must first fill a packet with encoded digitized speech before passing the packet to the Internet.
+
         4. Throughput in Computer Networks
 
+            * For simple two-link network, the throughput is min{Rc , Rs}, that is, it is the transmission rate of the **bottleneck** link.
+            * We saw that when there is no other intervening traffic, the throughput can simply be approximated as the minimum transmission rate along the path between source and destination.
+
     5. Protocol Layers And Their Service Models
+
         1. Layered Architecture
+
         2. Encapsulation
+
     6. Network Under Attack
+
     7. History of Compuer Networking and The History
         1. The Development of Packet Switching 1961-1972
         2. Proprietary Networks and Internetworking 1972-1980
