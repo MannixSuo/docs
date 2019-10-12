@@ -123,6 +123,48 @@ use_math: true
 
         1. Layered Architecture
 
+            * A layered architecture allows us to discuss a well-defined, specific part of a large and complex system. This simplification itself is of considerable value by providing modularity, making it much easier to change the implementation of the service provided by the layer and do not affect others that depends on this layer.
+
+            * For large and complex systems that are constantly being updated, the ability to change the implementation of a service without affecting other components of the system is another important advantage of layering.
+
+            Protocol Layering
+
+            * To provide structure to the design of network protocols, network designers organize protocols—and the network hardware and software that implement the protocols— in layers.layer. We are again interested in the services that a layer offers to the layer above—the so-called **service model** of a layer.Just as in the case of our airline example, each layer provides its service by (1) performing certain actions within that layer and by (2) using the services of the layer directly below it.
+
+            |Five-layer|Seven-layer|
+            |---|---|
+            |Application|Application|
+            |--|Presentation(表示层)|
+            |--|Session(会话层)|
+            |TransPort|Transport|
+            |Network|Network|
+            |Link|Link|
+            |Physical|Physical|
+
+            [Protocol layering has conceptual and structural advantages](https://tools.ietf.org/html/rfc3439)
+
+            Application Layer
+
+            * The application layer is where network applications and their application-layer protocols reside. The Internet’s application layer includes many protocols, such as the HTTP protocol SMTP , and FTP and the domain name system (DNS).An application-layer protocol is distributed over multiple end systems, with the application in one end system using the protocol to exchange packets of information with the application in another end system. We’ll refer to this packet of information at the application layer as a **message**.
+
+            Transport Layer
+
+            * The Internet’s transport layer transports application-layer messages between application endpoints. In the Internet there are two transport protocols, TCP and UDP, either of which can transport application-layer messages. we’ll refer to a transport-layer packet as a **segment**.
+
+            Network Layer
+
+            * The Internet’s network layer is responsible for moving network-layer packets known as **datagrams(数据报)** from one host to another. The network layer then provides the service of delivering the segment to the transport layer in the destination host. The Internet’s network layer includes the celebrated IP Protocol, which defines the fields in the datagram as well as how the end systems and routers act on these fields. There is only one IP protocol, and all Internet components that have a network layer must run the IP protocol.The Internet’s network layer also contains routing protocols that determine the routes that datagrams take between sources and destinations.
+
+            Link Layer
+
+            * The Internet’s network layer routes a datagram through a series of routers between the source and destination. To move a packet from one node (host or router) to the next node in the route, the network layer relies on the services of the link layer. The services provided by the link layer depend on the specific link-layer protocol that is employed over the link. Examples of linklayer protocols include Ethernet, WiFi, and the cable access network’s DOCSIS protocol.In this book, we’ll refer to the linklayer packets as **frames(帧)**.
+
+            Physical Layer
+            * the job of the physical layer is to move the individual bits within the frame from one node to the next.
+
+            The OSI Model
+            * The role of the presentation layer is to provide services that allow communicating applications to interpret the meaning of data exchanged. These services include data compression and data encryption (which are selfexplanatory) as well as data description (which, as we will see in Chapter 9, frees the applications from having to worry about the internal format in which data are represented/stored—formats that may differ from one computer to another). The session layer provides for delimiting and synchronization of data exchange, including the means to build a checkpointing and recovery scheme.
+
         2. Encapsulation
 
     6. Network Under Attack
