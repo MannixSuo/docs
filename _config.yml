@@ -4,3 +4,5 @@ sass:
   style: compact
 markdown: kramdown
 mathjax: true
+plugins:
+  - jemoji
