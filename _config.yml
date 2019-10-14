@@ -2,7 +2,5 @@ title: Book Worm
 author: MannixSuo
 sass:
   style: compact
-markdown: kramdown
-mathjax: true
 plugins:
   - jemoji
