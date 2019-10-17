@@ -7,23 +7,7 @@ use_math: true
 
 1. ## Computer Networks and the Internet
 
-2. Application Layer
-    1. Principles of Network Applications
-    2. The Web and HTTP
-    3. File Transfer:FTP
-    4. Electronic Mail in the internet
-    5. DNS-The internet's Directory Service
-    6. Peer-to-Peer Applications
-    7. Socket Programing:Creating Network Applications
-    8. Summary
-
-    Homework Problems and Questions
-
-    Socket Programing Assignments
-
-    Wireshark Labs: HTTP,DNS.
-
-    Interview: Marc Andreessen
+2. ## Application Layer
 
 3. Transport Layer
     1. Introduction and Transport-Layer Services
