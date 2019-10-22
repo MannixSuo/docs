@@ -115,6 +115,31 @@ use_math: true
 
 2. The Web and HTTP
 
+    1. Overview of HTTP
+
+        * The HyperText Transfer Protocol (HTTP), the Web’s application-layer protocol, is at the heart of the Web.
+
+        * HTTP use TCP as its underlying transport protocol.
+
+        * Because an HTTP server maintains no information about the clients, HTTP is said to be a **statless protocol**
+
+    2. Non-Persistent and Persistent Connections
+
+        * If each request/response be sent over a separate TCP connection its non-persistent connections.
+
+        * If each request/response be sent over same TCP connection its persistent connection.
+
+        HTTP with Non-Persistent Connections
+
+        * client will automatically request url in a html file. such as images.
+
+        * The **round-trip time (RTT)** is the time it takes for a small packet to travel from client to server and then back to the client.
+
+        * Three way handshake--the client send a small TCP segment to server,the server acknowledges(ack) and response with a small TCP segment,and finally ,the client acknowledges back to the server.The first two part of three way handshake take one RTT.
+
+        Http with Persistent Connections
+
+
 3. File Transfer:FTP
 4. Electronic Mail in the internet
 5. DNS-The internet's Directory Service
