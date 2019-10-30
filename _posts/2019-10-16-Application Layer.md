@@ -139,6 +139,16 @@ use_math: true
 
         Http with Persistent Connections
 
+    3. HTTP Message Format
+
+        The HTTP specifications [RFC 1945;RFC 2616] includes the definitions of the HTTP message formats.
+
+        HTTP request message
+
+            GET /somedir/page.html HTTP/1.1
+            Host: www.someschool.edu
+            Connection: close User-agent: Mozilla/5.0
+            Accept-language: fr
 
 3. File Transfer:FTP
 4. Electronic Mail in the internet
