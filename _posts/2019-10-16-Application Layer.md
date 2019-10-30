@@ -150,7 +150,58 @@ use_math: true
             Connection: close User-agent: Mozilla/5.0
             Accept-language: fr
 
-3. File Transfer:FTP
+        * First message is written in ASCII text.
+
+    4. User-Server Interaction: Cookies
+
+        Cookies defined in [RFC 6265],allow sites to keep track of users.
+
+        Cookie technology has four componments:
+
+            (1) a cookie header line in the HTTP response message;
+            (2) a cookie header line in the HTTP request message;
+            (3) a cookie file kept on the user’s end system and managed by the user’s browser;
+            (4) a back-end database at the Web site.
+
+    5. Web Caching
+
+    6. The Conditional Get
+
+        Use http header `If-modified-since: Wed, 7 Sep 2011 09:23:24`
+
+3. File Transfer: FTP
+
+    Http and FTP are both file transfer protocols and have many common characteristics.
+
+    The most striking difference is that FTP use **two** parallel TCP connections to transfer a file, a `control connection` and a `data connection`.
+    The control connection is used for send controll information between two hosts, information such as identification,password,commands to change remote dictionary. The data connection is used to transfer file.FTP is said to send its control information **out-of-band**.
+
+    Http send requeset and response header lines into the same TCP connection that carries the transferred file itself.
+
+    FTP will create new TCP connection for each file.
+
+    FTP must keep tracke of the user's current dictionary. HTTP is statless - it does not have to keep track of any user state.
+
+    1. FTP commands and Replines.
+
+        * The commands, from client to server, and replies, from server to client, are sent across the control connection in 7-bit ASCII format.
+        * command. Each command consists of four uppercase ASCII characters, some with optional arguments.
+
+        * USER username: Used to send the user identification to the server.
+        * PASS password: Used to send the user password to the server.
+        * LIST: Used to ask the server to send back a list of all the files in the current remote directory. The list of files is sent over a (new and non-persistent) data connection rather than the control TCP connection.
+        * RETR filename: Used to retrieve (that is, get) a file from the current directory of the remote host. This command causes the remote host to initiate a data connection and to send the requested file over the data connection.
+        * STOR filename: Used to store (that is, put) a file into the current directory of the remote host.
+
+        Each FTP command is followed by a reply,send from server to client.
+
+        * 331 Username OK, password required
+        * 125 Data connection already open; transfer starting
+        * 425 Can’t open data connection
+        * 452 Error writing file
+
+        Readers who are interested in learning about the other FTP commands and replies are encouraged to read `RFC 959`.
+
 4. Electronic Mail in the internet
 5. DNS-The internet's Directory Service
 6. Peer-to-Peer Applications
@@ -187,6 +238,8 @@ use_math: true
     R6. Suppose you wanted to do a transaction from a remote client to a server as fast as possible. Would you use UDP or TCP? Why?
 
         TCP, because tcp provides a reliable data transfer service.
+
+    SECTIONS 2.2–2.5
 
 Socket Programing Assignments
 
