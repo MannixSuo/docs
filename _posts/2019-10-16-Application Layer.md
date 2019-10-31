@@ -139,6 +139,42 @@ use_math: true
 
         Http with Persistent Connections
 
+        * With presistent connections the server leaves the TCP connection open after sending a response.
+    
+    3. HTTP Message Format
+        * The HTTP specifications [RFC 1945;RFC 2616] include the definitions of the HTTP message formats. There are two types of HTTP messages,request messages and response messages.
+
+        HTTP request Message
+        
+        * Message written in ASCII text.
+        * Eachline is followed by an carriage return(回车) and line feed(换行).
+        * The last line is followed by an additional carriage return and line feed.
+        * The first line of an HTTP request message is called the request line.
+        * The subsequent lines are called the header lines.
+        * The request line has three fields : the method field,the URL field,and the HTTP version field. 
+
+        method |sp| URL |sp| Version |cr||lf|
+        header field name :|sp| value |cr||lf|
+        |cr||lf|
+        Entity Body
+
+        HTTP Response Message
+
+        * Status code and their phrases:
+        * 200 OK: Request succeeded and the information is returned in the response.
+        * 301 Moved Permanently: Requested object has been permanently moved;the new URL is specified in Location: header of the response message.
+        * 400 Bad Request: This is a generic error code indicating that the request could not be understood by the server.
+        * 404 Not Found: The request document does not exist on this server.
+        * 505 Http Version Not Supported: The requested HTTP protocol version is not supported by the server.
+
+        Version|sp|status code|sp|phrase|cr|lf|
+        header field name:|sp|value|cr||lf|
+        ...
+        |cr||lf|
+        body
+
+
+
 
 3. File Transfer:FTP
 4. Electronic Mail in the internet
