@@ -203,7 +203,79 @@ use_math: true
         Readers who are interested in learning about the other FTP commands and replies are encouraged to read `RFC 959`.
 
 4. Electronic Mail in the internet
+
+    * Modern e-mail has many powerful features, including messages with attachments, hyperlinks, HTML-formatted text, and embedded photos.
+
+    Simple Mail Transfer Protocol (SMTP)
+
+    * SMTP is the principal application-layer protocol for Internet electronic mail. It uses the reliable data transfer service of TCP to transfer mail from the sender’s mail server to the recipient’s mail server. As with most application-layer protocols, SMTP has two sides: a client side, which executes on the sender’s mail server, and a server side, which executes on the recipient’s mail server. Both the client and server sides of SMTP run on every mail server. When a mail server sends mail to other mail servers, it acts as an SMTP client. When a mail server receives mail from other mail servers, it acts as an SMTP server.
+
+    1. SMTP
+
+        * SMTP, defined in `RFC 5321`, is at the heart of Internet electronic mail.
+        * TCP port 25.
+        * SMTP clients and servers introduce themselves before transferring information.
+        * Let’s next take a look at an example transcript of messages exchanged between an SMTP client (C) and an SMTP server (S).The following transcript begins as soon as the TCP connection is established.
+
+                S: 220 hamburger.edu
+                C: HELO crepes.fr
+                S: 250 Hello crepes.fr, pleased to meet you
+                C: MAIL FROM: <alice@crepes.fr>
+                S: 250 alice@crepes.fr ... Sender ok
+                C: RCPT TO: <bob@hamburger.edu>
+                S: 250 bob@hamburger.edu ... Recipient ok
+                C: DATA
+                S: 354 Enter mail, end with “.” on a line by itself
+                C: Do you like ketchup?
+                C: How about pickles?
+                C: .
+                S: 250 Message accepted for delivery
+                C: QUIT
+                S: 221 hamburger.edu closing connection
+
+        * SMTP uses persistent connections: If the sending mail server has several messages to send to the same receiving mail server, it can send all of the messages over the same TCP connection.
+
+    2. Comparsion with HTTP
+
+        Common:
+
+        * Both protocols are used to transfer files from one host to another:HTTP transfers files (also called objects) from a Web server to a Web client (typically a browser); SMTP transfers files (that is, e-mail messages) from one mail server to another mail server.
+        * When transferring the files, both persistent HTTP and SMTP use persistent connections.
+
+        Difference:
+
+        * HTTP is mainly a `pull protocol`—someone loads information on a Web server and users use HTTP to pull the information from the server at their convenience.
+        * SMTP is primarily a `push protocol`—the sending mail server pushes the file to the receiving mail server. In particular, the TCP connection is initiated by the machine that wants to send the file.
+        * SMTP requires each message, including the body of each message, to be in 7-bit ASCII format. If the message contains characters that are not 7-bit ASCII (for example, French characters with accents) or contains binary data (such as an image file), then the message has to be encoded into 7-bit ASCII. HTTP data does not impose this restriction.
+        * HTTP encapsulates each object in its own HTTP response message. Internet mail places all of the message’s objects into one message.
+
+    3. Mail Message Formats
+
+        This peripheral information is contained in a series of header lines, which are defined in RFC 5322.
+
+    4. Mail Access Protocols
+
+        * There are currently a number of popular mail access protocols, including Post Office Protocol—Version 3 (POP3), Internet Mail Access Protocol (IMAP), and HTTP.
+
+        POP3
+
+        * It is defined in [RFC 1939], which is short and quite readable.
+        * use port 110.
+
+        IMAP
+
+        * POP3 does not provide any means for a user to create remote folders and assign messages to folders.
+        * defined in [RFC 3501]
+        * An IMAP server will associate each message with a folder; when a message first arrives at the server, it is associated with the recipient’s INBOX folder.
+        * The IMAP protocol provides commands to allow users to create folders and move messages from one folder to another. IMAP also provides commands that allow users to search remote folders for messages matching specific criteria.
+        * Another important feature of IMAP is that it has commands that permit a user agent to obtain components of messages.
+
+        Web-Based Email
+
+        * With this service, the user agent is an ordinary Web browser, and the user communicates with its remote mailbox via HTTP. When a recipient, such as Bob, wants to access a message in his mailbox, the e-mail message is sent from Bob’s mail server to Bob’s browser using the HTTP protocol rather than the POP3 or IMAP protocol. When a sender, such as Alice, wants to send an e-mail message, the e-mail message is sent from her browser to her mail server over HTTP rather than over SMTP. Alice’s mail server, however, still sends messages to, and receives messages from, other mail servers using SMTP.
+
 5. DNS-The internet's Directory Service
+
 6. Peer-to-Peer Applications
 7. Socket Programing:Creating Network Applications
 8. Summary
