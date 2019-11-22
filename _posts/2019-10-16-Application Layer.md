@@ -140,12 +140,12 @@ use_math: true
         Http with Persistent Connections
 
         * With presistent connections the server leaves the TCP connection open after sending a response.
-    
+
     3. HTTP Message Format
         * The HTTP specifications [RFC 1945;RFC 2616] include the definitions of the HTTP message formats. There are two types of HTTP messages,request messages and response messages.
 
         HTTP request Message
-        
+
         * Message written in ASCII text.
         * Eachline is followed by an carriage return(回车) and line feed(换行).
         * The last line is followed by an additional carriage return and line feed.
@@ -296,6 +296,44 @@ use_math: true
         * With this service, the user agent is an ordinary Web browser, and the user communicates with its remote mailbox via HTTP. When a recipient, such as Bob, wants to access a message in his mailbox, the e-mail message is sent from Bob’s mail server to Bob’s browser using the HTTP protocol rather than the POP3 or IMAP protocol. When a sender, such as Alice, wants to send an e-mail message, the e-mail message is sent from her browser to her mail server over HTTP rather than over SMTP. Alice’s mail server, however, still sends messages to, and receives messages from, other mail servers using SMTP.
 
 5. DNS-The internet's Directory Service
+
+    1. Services Provided by DNS
+
+        Translate hostname to Ip address
+
+        The DNS is
+            1. a distributed database implemented in a hierarchy of DNS servers
+            2. an application-layer protocol that allows hosts to query the distributed database.
+
+        The DNS servers are often UNIX machines running the Berkeley Internet Name Domain (BIND) software [BIND 2012]. The DNS protocol runs over **UDP** and uses port **53**.
+
+        DNS provides a few other important services in addtion to translating hostnames to IP addresses:
+
+        * Host aliasing. A host with a complicated hostname can have one or more alias names.For example, a hostname such as relay1.west-coast.enterprise.com could have, say, two aliases such as enterprise.com and www.enterprise.com. In this case, the hostname relay1.westcoast.enterprise.com is said to be a canonical hostname.
+
+        * Mail server aliasing.
+
+        * Load distribution.
+
+    2. Overview of How DNS Works
+
+        A simple design for DNS would have one DNS server that contains all the mappings.The problem with a centralized design include:
+
+            * A single point of failure. If the DNS server crashes,so does the entire Internet.
+            * Traffic volume. A single DNS server would have to handle all DNS queries.
+            * Distant centralized database. A single DNS server cannot be “close to” all the querying clients. This can lead to significant delays.
+            * Maintenance. The single DNS server would have to keep records for all Internet hosts. Not only would this centralized database be huge, but it would have to be updated frequently to account for every new host.
+
+        A Distributed,Hierarchical Database
+
+            No single DNS server has all of the mappings for all of the hosts in the Internet. Instead, the mappings are distributed across the DNS servers.
+
+            To a first approximation, there are three classes of DNS servers—root DNS servers, top-level domain (TLD) DNS servers, and authoritative DNS servers.
+            
+            * Root DNS servers. In the Internet there are 13 root DNS servers (labeled A through M), most of which are located in North America.
+            * Top-level domain (TLD) servers. These servers are responsible for top-level domains such as com, org, net, edu, and gov, and all of the country top-level domains such as uk, fr, ca, and jp. The company Verisign Global Registry Services maintains the TLD servers for the com top-level domain, and the company Educause maintains the TLD servers for the edu top-level domain.
+            * Authoritative DNS servers. Every organization with publicly accessible hosts (such as Web servers and mail servers) on the Internet must provide publicly accessible DNS records that map the names of those hosts to IP addresses. An organization’s authoritative DNS server houses these DNS records. An organization canchoose to implement its own authoritative DNS server to hold these records; alternatively, the organization can pay to have these records stored in an authoritative DNS server of some service provider. Most universities and large companies implement and maintain their own primary and secondary (backup) authoritative DNS server.
+
 
 6. Peer-to-Peer Applications
 7. Socket Programing:Creating Network Applications
