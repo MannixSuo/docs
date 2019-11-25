@@ -380,7 +380,10 @@ use_math: true
 
 6. Peer-to-Peer Applications
 
-    
+    1. P2P File Distribution
+
+        In P2P file distribution, each peer can redistribute any portion of the file it has received to any other peers, thereby assisting the server in the distribution process.
+
 7. Socket Programing:Creating Network Applications
 8. Summary
 
