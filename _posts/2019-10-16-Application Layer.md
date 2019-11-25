@@ -2,12 +2,12 @@
 title: Application Layer
 layout: posts
 tags: computer_network
-use_math: true
+use_math: false
 ---
 
 1. Principles of Network Applications
 
-        network applications are based on application layer.
+    network applications are based on application layer.
 
     1. Network Application Architectures
 
@@ -17,9 +17,9 @@ use_math: true
 
         three challenges for peer-to-peer applications
 
-            1. ISP friendly, because asymmetrical bandwidth usage.
-            2. Security
-            3. Incentive, how to convence user to volunteer bandwidth,stroge,and computation resources to application.
+        1. ISP friendly, because asymmetrical bandwidth usage.
+        2. Security
+        3. Incentive, how to convence user to volunteer bandwidth,stroge,and computation resources to application.
 
     2. Processes Communicating
 
@@ -79,13 +79,13 @@ use_math: true
 
         TCP Services
 
-            The TCP service model includes a connection-oriented service and a reliable data transfer service. When an application invokes TCP as its transport protocol, the application receives both of these services from TCP.
+        The TCP service model includes a connection-oriented service and a reliable data transfer service. When an application invokes TCP as its transport protocol, the application receives both of these services from TCP.
 
-            * Connection-oriented service. TCP has the client and server exchange transportlayer control information with each other before the application-level messages begin to flow. This so-called handshaking procedure alerts the client and server, allowing them to prepare for an onslaught of packets. After the handshaking phase, a TCP connection is said to exist between the sockets of the two processes.
-            
-            * Reliable data transfer service. The communicating processes can rely on TCP to deliver all data sent without error and in the proper order.
+        * Connection-oriented service. TCP has the client and server exchange transportlayer control information with each other before the application-level messages begin to flow. This so-called handshaking procedure alerts the client and server, allowing them to prepare for an onslaught of packets. After the handshaking phase, a TCP connection is said to exist between the sockets of the two processes.
 
-            TCP also includes a congestion-control mechanism, a service for the general welfare of the Internet rather than for the direct benefit of the communicating processes.
+        * Reliable data transfer service. The communicating processes can rely on TCP to deliver all data sent without error and in the proper order.
+
+        TCP also includes a congestion-control mechanism, a service for the general welfare of the Internet rather than for the direct benefit of the communicating processes.
 
         UDP Services
 
@@ -93,7 +93,7 @@ use_math: true
 
         Services Not Provided by Internet Transport Protocols
 
-            * Timing and thoughtput are not provided by Internet Transport Protocols
+        * Timing and thoughtput are not provided by Internet Transport Protocols
 
     5. Application-layer Protocols
 
@@ -151,12 +151,15 @@ use_math: true
         * The last line is followed by an additional carriage return and line feed.
         * The first line of an HTTP request message is called the request line.
         * The subsequent lines are called the header lines.
-        * The request line has three fields : the method field,the URL field,and the HTTP version field. 
+        * The request line has three fields : the method field,the URL field,and the HTTP version field.
 
-        method |sp| URL |sp| Version |cr||lf|
-        header field name :|sp| value |cr||lf|
-        |cr||lf|
-        Entity Body
+            method \|sp\| URL \|sp\| Version \|cr\|lf\|
+
+            header field name :\|sp\| value \|cr\|\|lf\|
+
+            \|cr|\|lf\|
+
+            Entity Body
 
         HTTP Response Message
 
@@ -167,11 +170,15 @@ use_math: true
         * 404 Not Found: The request document does not exist on this server.
         * 505 Http Version Not Supported: The requested HTTP protocol version is not supported by the server.
 
-        Version|sp|status code|sp|phrase|cr|lf|
-        header field name:|sp|value|cr||lf|
-        ...
-        |cr||lf|
-        body
+            Version\|sp\|status code\|sp\|phrase\|cr\|lf\|
+
+            header field name:\|sp\|value\|cr\|\|lf\|
+
+            ...
+
+            \|cr\|\|lf\|
+
+            body
 
     4. User-Server Interaction: Cookies
 
@@ -179,10 +186,13 @@ use_math: true
 
         Cookie technology has four componments:
 
-            (1) a cookie header line in the HTTP response message;
-            (2) a cookie header line in the HTTP request message;
-            (3) a cookie file kept on the user’s end system and managed by the user’s browser;
-            (4) a back-end database at the Web site.
+        (1) a cookie header line in the HTTP response message;
+
+        (2) a cookie header line in the HTTP request message;
+
+        (3) a cookie file kept on the user’s end system and managed by the user’s browser;
+
+        (4) a back-end database at the Web site.
 
     5. Web Caching
 
@@ -319,28 +329,29 @@ use_math: true
 
         A simple design for DNS would have one DNS server that contains all the mappings.The problem with a centralized design include:
 
-            * A single point of failure. If the DNS server crashes,so does the entire Internet.
-            * Traffic volume. A single DNS server would have to handle all DNS queries.
-            * Distant centralized database. A single DNS server cannot be “close to” all the querying clients. This can lead to significant delays.
-            * Maintenance. The single DNS server would have to keep records for all Internet hosts. Not only would this centralized database be huge, but it would have to be updated frequently to account for every new host.
+        * A single point of failure. If the DNS server crashes,so does the entire Internet.
+        * Traffic volume. A single DNS server would have to handle all DNS queries.
+        * Distant centralized database. A single DNS server cannot be “close to” all the querying clients. This can lead to significant delays.
+        * Maintenance. The single DNS server would have to keep records for all Internet hosts. Not only would this centralized database be huge, but it would have to be updated frequently to account for every new host.
 
         A Distributed,Hierarchical Database
 
-            No single DNS server has all of the mappings for all of the hosts in the Internet. Instead, the mappings are distributed across the DNS servers.
+        No single DNS server has all of the mappings for all of the hosts in the Internet. Instead, the mappings are distributed across the DNS servers.
 
-            To a first approximation, there are three classes of DNS servers—root DNS servers, top-level domain (TLD) DNS servers, and authoritative DNS servers.
-            
-            * Root DNS servers. In the Internet there are 13 root DNS servers (labeled A through M), most of which are located in North America.
-            * Top-level domain (TLD) servers. These servers are responsible for top-level domains such as com, org, net, edu, and gov, and all of the country top-level domains such as uk, fr, ca, and jp. The company Verisign Global Registry Services maintains the TLD servers for the com top-level domain, and the company Educause maintains the TLD servers for the edu top-level domain.
-            * Authoritative DNS servers. Every organization with publicly accessible hosts (such as Web servers and mail servers) on the Internet must provide publicly accessible DNS records that map the names of those hosts to IP addresses. An organization’s authoritative DNS server houses these DNS records. An organization canchoose to implement its own authoritative DNS server to hold these records; alternatively, the organization can pay to have these records stored in an authoritative DNS server of some service provider. Most universities and large companies implement and maintain their own primary and secondary (backup) authoritative DNS server.
+        To a first approximation, there are three classes of DNS servers—root DNS servers, top-level domain (TLD) DNS servers, and authoritative DNS servers.
+
+        * Root DNS servers. In the Internet there are 13 root DNS servers (labeled A through M), most of which are located in North America.
+        * Top-level domain (TLD) servers. These servers are responsible for top-level domains such as com, org, net, edu, and gov, and all of the country top-level domains such as uk, fr, ca, and jp. The company Verisign Global Registry Services maintains the TLD servers for the com top-level domain, and the company Educause maintains the TLD servers for the edu top-level domain.
+        * Authoritative DNS servers. Every organization with publicly accessible hosts (such as Web servers and mail servers) on the Internet must provide publicly accessible DNS records that map the names of those hosts to IP addresses. An organization’s authoritative DNS server houses these DNS records. An organization canchoose to implement its own authoritative DNS server to hold these records; alternatively, the organization can pay to have these records stored in an authoritative DNS server of some service provider. Most universities and large companies implement and maintain their own primary and secondary (backup) authoritative DNS server.
 
         DNS Caching
 
-            DNS extensively exploits DNS caching in order to improve the delay performance and to reduce the number of DNS messages ricocheting around the Internet.
-            
-            A local DNS server can also cache the IP addresses of TLD servers, thereby allowing the local DNS server to bypass the root DNS servers in a query chain (this often happens).
+        * DNS extensively exploits DNS caching in order to improve the delay performance and to reduce the number of DNS messages ricocheting around the Internet.
+
+        * A local DNS server can also cache the IP addresses of TLD servers, thereby allowing the local DNS server to bypass the root DNS servers in a query chain (this often happens).
 
     3. DNS Records and Messages
+
         The DNS servers that together implement the DNS distributed database store resource records (RRs), including RRs that provide hostname-to-IP address mappings.
 
         more details can be found in [Abitz 1993] or in the DNS RFCs [RFC 1034; RFC 1035].
@@ -353,13 +364,13 @@ use_math: true
 
         The meaning of Name and Value depend on Type:
 
-            * If Type=A ,then Name is a hostname and Value is the IP address for the hostname. Thus, a Type A record provides the standard hostname-to-IP address mapping. As an example, (relay1.bar.foo.com, 145.37.93.126, A) is a Type A record.
+        * If Type=A ,then Name is a hostname and Value is the IP address for the hostname. Thus, a Type A record provides the standard hostname-to-IP address mapping. As an example, (relay1.bar.foo.com, 145.37.93.126, A) is a Type A record.
 
-            * If Type=NS then Name is a domain (such as foo.com) and Value is the hostname of an authoritative DNS server that knows how to obtain the IP addresses for hosts in the domain. This record is used to route DNS queries further along in the query chain. As an example, (foo.com, dns.foo.com, NS) is a Type NS record.
+        * If Type=NS then Name is a domain (such as foo.com) and Value is the hostname of an authoritative DNS server that knows how to obtain the IP addresses for hosts in the domain. This record is used to route DNS queries further along in the query chain. As an example, (foo.com, dns.foo.com, NS) is a Type NS record.
 
-            * If Type=CNAME,then Value is a canonical hostname for the alias hostname Name. This record can provide querying hosts the canonical name for a hostname. As an example, (foo.com, relay1.bar.foo.com, CNAME) is a CNAME record.
-            
-            * If Type=MX, then Value is the canonical name of a mail server that has an alias hostname Name. As an example, (foo.com, mail.bar.foo.com, MX) is an MX record. MX records allow the hostnames of mail servers to have simple aliases. Note that by using the MX record, a company can have the same aliased name for its mail server and for one of its other servers (such as its Web server). To obtain the canonical name for the mail server, a DNS client would query for an MX record; to obtain the canonical name for the other server, the DNS client would query for the CNAME record.
+        * If Type=CNAME,then Value is a canonical hostname for the alias hostname Name. This record can provide querying hosts the canonical name for a hostname. As an example, (foo.com, relay1.bar.foo.com, CNAME) is a CNAME record.
+
+        * If Type=MX, then Value is the canonical name of a mail server that has an alias hostname Name. As an example, (foo.com, mail.bar.foo.com, MX) is an MX record. MX records allow the hostnames of mail servers to have simple aliases. Note that by using the MX record, a company can have the same aliased name for its mail server and for one of its other servers (such as its Web server). To obtain the canonical name for the mail server, a DNS client would query for an MX record; to obtain the canonical name for the other server, the DNS client would query for the CNAME record.
 
         If a DNS server is authoritative for a particular hostname, then the DNS server will contain a Type A record for the hostname. (Even if the DNS server is not authoritative, it may contain a Type A record in its cache.) If a server is not authoritative for a hostname, then the server will contain a Type NS record for the domain that includes the hostname; it will also contain a Type A record that provides the IP address of the DNS server in the Value field of the NS record.
 
@@ -368,13 +379,13 @@ use_math: true
         The first 12 bytes is the header section, which has a number of fields. The first field is a 16-bit number that identifies the query. This identifier is copied into the reply message to a query, allowing the client to match received replies with sent queries. There are a number of flags in the flag field. A 1-bit query/reply flag indicates whether the message is a query (0) or a reply (1). A 1-bit authoritative flag is set in a reply message when a DNS server is an authoritative server for a queried name. A 1-bit recursion-desired flag is set when a client (host or DNS server) desires that the DNS server perform recursion when it doesn’t have the record. A 1-bit recursionavailable field is set in a reply if the DNS server supports recursion.
         In the header,there are also four number-of fields. These fields indicate the number of occurrences of the four types of data sections that follow the header.
 
-            * The question section contains information about the query that is being made. This section includes (1) a name field that contains the name that is being queried, and (2) a type field that indicates the type of question being asked about the name—for example, a host address associated with a name (Type A) or the mail server for a name (Type MX).
+        * The question section contains information about the query that is being made. This section includes (1) a name field that contains the name that is being queried, and (2) a type field that indicates the type of question being asked about the name—for example, a host address associated with a name (Type A) or the mail server for a name (Type MX).
 
-            * In a reply from a DNS server, the answer section contains the resource records for the name that was originally queried. Recall that in each resource record there is the Type (for example, A, NS, CNAME, and MX), the Value, and the TTL. A reply can return multiple RRs in the answer, since a hostname can have multiple IP addresses (for example, for replicated Web servers, as discussed earlier in this section).
+        * In a reply from a DNS server, the answer section contains the resource records for the name that was originally queried. Recall that in each resource record there is the Type (for example, A, NS, CNAME, and MX), the Value, and the TTL. A reply can return multiple RRs in the answer, since a hostname can have multiple IP addresses (for example, for replicated Web servers, as discussed earlier in this section).
 
-            * The authority section contains records of other authoritative servers.
-            
-            * The additional section contains other helpful records. For example, the answer field in a reply to an MX query contains a resource record providing the canonical hostname of a mail server. The additional section contains a Type A record providing the IP address for the canonical hostname of the mail server.
+        * The authority section contains records of other authoritative servers.
+
+        * The additional section contains other helpful records. For example, the answer field in a reply to an MX query contains a resource record providing the canonical hostname of a mail server. The additional section contains a Type A record providing the IP address for the canonical hostname of the mail server.
 
         Inserting Records into the DNS Database
 
@@ -389,36 +400,37 @@ use_math: true
 
 ## Homework Problems and Questions
 
-    SECTION 2.1 
-    
-    R1. List five nonproprietary Internet applications and the application-layer protocols that they use. 
+SECTION 2.1
 
-        QQ OICQ.
-        Wechat http.
-        Foxmail smtp.
-        Chrome HTTP.
-        Xshell SSH/FTP.
+R1. List five nonproprietary Internet applications and the application-layer protocols that they use.
 
-    R2. What is the difference between network architecture and application architecture? 
+QQ OICQ.
+Wechat http.
+Foxmail smtp.
+Chrome HTTP.
+Xshell SSH/FTP.
 
-        network architecture are pre defined and well knowned and only one architecture. but application architure are different from other applications,developer can choose any architecture they like.
-    
-    R3. For a communication session between a pair of processes, which process is the client and which is the server? 
-        
-        the process that initiates the communication is label as client,The process that waits to be contacted to begin the session is the server.
+R2. What is the difference between network architecture and application architecture?
 
-    R4. For a P2P file-sharing application, do you agree with the statement, “There is no notion of client and server sides of a communication session”? Why or why not?
-        I agree, because any computer can initiates a communication, themselves also wait for connection.
-    
-    R5. What information is used by a process running on one host to identify a process running on another host? 
+network architecture are pre defined and well knowned and only one architecture. but application architure are different from other applications,developer can choose any architecture they like.
 
-        to identify a host use ip address,to identify a process use port number.
+R3. For a communication session between a pair of processes, which process is the client and which is the server?
 
-    R6. Suppose you wanted to do a transaction from a remote client to a server as fast as possible. Would you use UDP or TCP? Why?
+the process that initiates the communication is label as client,The process that waits to be contacted to begin the session is the server.
 
-        TCP, because tcp provides a reliable data transfer service.
+R4. For a P2P file-sharing application, do you agree with the statement, “There is no notion of client and server sides of a communication session”? Why or why not?
 
-    SECTIONS 2.2–2.5
+I agree, because any computer can initiates a communication, themselves also wait for connection.
+
+R5. What information is used by a process running on one host to identify a process running on another host?
+
+to identify a host use ip address,to identify a process use port number.
+
+R6. Suppose you wanted to do a transaction from a remote client to a server as fast as possible. Would you use UDP or TCP? Why?
+
+TCP, because tcp provides a reliable data transfer service.
+
+SECTIONS 2.2–2.5
 
 Socket Programing Assignments
 
