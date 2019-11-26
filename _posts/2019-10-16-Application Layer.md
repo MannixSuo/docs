@@ -395,6 +395,16 @@ use_math: false
 
         In P2P file distribution, each peer can redistribute any portion of the file it has received to any other peers, thereby assisting the server in the distribution process.
 
+        Scalability of P2P Architectures
+
+        In the client-server architecture, none of the peers aids in distributing the file. We make the following observations:
+
+        * The server must transmit one copy of the file to each of the N peers. Thus the server must transmit NF bits. Since the server’s upload rate is us , the time to distribute the file must be at least**NF/us**
+
+        * Let dmin denote the download rate of the peer with the lowest download rate, that is, dmin = min{d1,dp,...,dN}. The peer with the lowest download rate cannot obtain all F bits of the file in less than F/dmin seconds. Thus the minimum distribution time is at least **F/dmin**.
+
+        So distribution time Dcs = max{NF/us,F/dmin}
+
 7. Socket Programing:Creating Network Applications
 8. Summary
 
