@@ -444,8 +444,9 @@ use_math: false
 
 7. Socket Programing:Creating Network Applications
 
-    
 8. Summary
+
+    In this chapter, we’ve studied the conceptual and the implementation aspects of network applications. We’ve learned about the ubiquitous client-server architecture adopted by many Internet applications and seen its use in the HTTP, FTP, SMTP, POP3, and DNS protocols. We’ve studied these important application-level protocols, and their corresponding associated applications (the Web, file transfer, e-mail, and DNS) in some detail. We’ve also learned about the increasingly prevalent P2P architecture and how it is used in many applications. We’ve examined how the socket API can be used to build network applications. We’ve walked through the use of sockets for connection-oriented (TCP) and connectionless (UDP) end-to-end transport services. The first step in our journey down the layered network architecture is now complete!
 
 ## Homework Problems and Questions
 
@@ -478,6 +479,23 @@ to identify a host use ip address,to identify a process use port number.
 R6. Suppose you wanted to do a transaction from a remote client to a server as fast as possible. Would you use UDP or TCP? Why?
 
 TCP, because tcp provides a reliable data transfer service.
+
+R7. Referring to Figure 2.4, we see that none of the applications listed in Figure 2.4 requires both no data loss and timing. Can you conceive of an application that requires no data loss and that is also highly time-sensitive?
+
+Phone text message, Bank transfer application.
+
+R8. List the four broad classes of services that a transport protocol can provide. For each of the service classes, indicate if either UDP or TCP (or both) provides such a service.
+
+|services|description|UDP |TCP  |
+|:---:|:----:|:---:|:---:|
+|reliable data transfer|A guarantee that no data loss|n|y|
+|throughput            |A guarantee that a certain value for throughput will be maintained|n|n|
+|timing                |A guarantee that data will be delivered within a specified amount of time|n|n|
+|security              |security|n|n|
+
+R9. Recall that TCP can be enhanced with SSL to provide process-to-process security services, including encryption. Does SSL operate at the transport layer or the application layer? If the application developer wants TCP to be enhanced with SSL, what does the developer have to do?
+
+SSL operate at the application layer.The SSL socket takes unencrypted data fromthe application layer, encrypts it and then passes it to the TCP socket. If theapplication developer wants TCP to be enhanced with SSL, she has to include the SSL code in the application.
 
 SECTIONS 2.2–2.5
 
