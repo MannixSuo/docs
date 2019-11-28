@@ -499,6 +499,51 @@ SSL operate at the application layer.The SSL socket takes unencrypted data fromt
 
 SECTIONS 2.2–2.5
 
+R10. What is meant by a handshaking protocol?
+
+before client and server exchange information with each other they should know status of eachother by handshaking.
+
+R11. Why do HTTP, FTP, SMTP, and POP3 run on top of TCP rather than on UDP?
+
+because tcp privider a reliable data transfer
+
+R12. Consider an e-commerce site that wants to keep a purchase record for each of its customers. Describe how this can be done with cookies.
+
+when the consumer first visit the site,it give a cookie number to customers and the cookie number is stored in customers browser. During each visit or purchase the browser send this information and cookie number back to the site. So the site can keep the purchase record for it's customers.
+
+R13. Describe how Web caching can reduce the delay in receiving a requested object. Will Web caching reduce the delay for all objects requested by a user or for only some of the objects? Why?
+
+because the throughput of our host to the caching server is more large than our host to the remote host.When our host request a object from caching server the caching server will request to the remote address and store the object. so next time the request to the caching server for the same object the caching server will ask the remote server wether this object is modified if not modified return it's caching. web caching reduce the delay for all requested objects.
+
+R14. Telnet into a Web server and send a multiline request message. Include in the request message the If-modified-since: header line to force a response message with the 304 Not Modified status code.
+
+R15. Why is it said that FTP sends control information “out-of-band”?
+
+because FTP use two parallel tcp connection,one connection for send command one connection for data transfer.
+
+R16. Suppose Alice, with a Web-based e-mail account (such as Hotmail or gmail), sends a message to Bob, who accesses his mail from his mail server using POP3. Discuss how the message gets from Alice’s host to Bob’s host. Be sure to list the series of application-layer protocols that are used to move the message between the two hosts.
+
+first Alice write a mail address to Bob and then send this mail to her server use http,the her mail server send the mail to Bob's mail server using SMTP,when Bob open his mail client ,the client get mail from mail server using POP3.
+
+R17. Print out the header of an e-mail message you have recently received. How many Received: header lines are there? Analyze each of the header lines in the message.
+
+```
+Received: from x.x.com (unknown [x.x.x.x])
+	by udms (Coremail) with SMTP id xxxx+AA--.x;
+	Thu, 28 Nov 2019 12:25:44 +0800 (CST)
+From: x@x.com
+To: x@x.com
+Cc: x@x.com
+Message-ID: <344956422.51.1574915445464.JavaMail.root@x>
+Subject: x
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+```
+
+R18. From a user’s perspective, what is the difference between the download-anddelete mode and the download-and-keep mode in POP3?
+
+With download and delete, after a user retrieves its messages from a POP server,the messages are deleted. This poses a problem for the nomadic user, who may want to access the messages from many different machines (office PC, home PC,etc.). In the download and keep configuration, messages are not deleted after the user retrieves the messages. This can also be inconvenient,as each time the user retrieves the stored messages from a new machine, all of non-deleted messages will be transferred to the new machine (including very old messages).
+
 Socket Programing Assignments
 
 Wireshark Labs: HTTP,DNS.
