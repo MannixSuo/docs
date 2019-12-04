@@ -3,13 +3,22 @@ title: Bookes I'm Reading
 layout: posts
 ---
 
+
+## Doing
+
+Learning Goland
+
 ## Reading
 
 Thinking in Java
 
 代码整洁之道
 
+Computer Networking A Top Down Approach
+
 ## Readed
+
+2019-8-15 I become a father :)
 
 2019-8 活着、许三观卖血计
 
