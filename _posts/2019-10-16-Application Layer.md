@@ -450,7 +450,7 @@ use_math: false
 
 ## Homework Problems and Questions
 
-SECTION 2.1
+### SECTION 2.1
 
 R1. List five nonproprietary Internet applications and the application-layer protocols that they use.
 
@@ -497,7 +497,7 @@ R9. Recall that TCP can be enhanced with SSL to provide process-to-process secur
 
 SSL operate at the application layer.The SSL socket takes unencrypted data fromthe application layer, encrypts it and then passes it to the TCP socket. If theapplication developer wants TCP to be enhanced with SSL, she has to include the SSL code in the application.
 
-SECTIONS 2.2–2.5
+### SECTIONS 2.2–2.5
 
 R10. What is meant by a handshaking protocol?
 
@@ -527,22 +527,73 @@ first Alice write a mail address to Bob and then send this mail to her server us
 
 R17. Print out the header of an e-mail message you have recently received. How many Received: header lines are there? Analyze each of the header lines in the message.
 
-```
-Received: from x.x.com (unknown [x.x.x.x])
-	by udms (Coremail) with SMTP id xxxx+AA--.x;
-	Thu, 28 Nov 2019 12:25:44 +0800 (CST)
-From: x@x.com
-To: x@x.com
-Cc: x@x.com
-Message-ID: <344956422.51.1574915445464.JavaMail.root@x>
-Subject: x
-MIME-Version: 1.0
-Content-Type: multipart/mixed;
-```
+    ```text
+    Received: from x.x.com (unknown [x.x.x.x])
+        by udms (Coremail) with SMTP id xxxx+AA--.x;
+        Thu, 28 Nov 2019 12:25:44 +0800 (CST)
+    From: x@x.com
+    To: x@x.com
+    Cc: x@x.com
+    Message-ID: <344956422.51.1574915445464.JavaMail.root@x>
+    Subject: x
+    MIME-Version: 1.0
+    Content-Type: multipart/mixed;
+    ```
 
 R18. From a user’s perspective, what is the difference between the download-anddelete mode and the download-and-keep mode in POP3?
 
 With download and delete, after a user retrieves its messages from a POP server,the messages are deleted. This poses a problem for the nomadic user, who may want to access the messages from many different machines (office PC, home PC,etc.). In the download and keep configuration, messages are not deleted after the user retrieves the messages. This can also be inconvenient,as each time the user retrieves the stored messages from a new machine, all of non-deleted messages will be transferred to the new machine (including very old messages).
+
+R19. Is it possible for an organization’s Web server and mail server to have exactly the same alias for a hostname (for example, foo.com)? What would be the type for the RR that contains the hostname of the mail server?
+
+It's possible,the RR's type will be a MX type record, (foo.com, mail.bar.foo.com, MX), then dns requester will get server address by query mail.bar.foo.com.
+
+R20. Look over your received emails, and examine the header of a message sent from a user with an .edu email address. Is it possible to determine from the header the IP address of the host from which the message was sent? Do the same for a message sent from a gmail account.
+
+It's possible, the `Received` properties in mail header contains the ipaddress where the mail send from.
+
+### SECTION 2.6
+
+R21. In BitTorrent, suppose Alice provides chunks to Bob throughout a 30-second interval. Will Bob necessarily return the favor and provide chunks to Alice in this same interval? Why or why not?
+
+It's not nessary taht Bob will provide chunks to Alice, Alice has to be in the top 4 neighbors of Bob for bob send out chunks to her, this might not occur even if Alice is provides chunks to Bob throughout a 30-second interval.
+
+R22. Consider a new peer Alice that joins BitTorrent without possessing any chunks. Without any chunks, she cannot become a top-four uploader for any of the other peers, since she has nothing to upload. How then will Alice get her first chunk?
+
+Alice will be selected as neighbors by others as the result of optimistically unchoked,the the neighbors will send chunks to her.
+
+R23. What is an overlay network? Does it include routers? What are the edges in the overlay network?
+
+In a overlay network the peers from an abstract logic network which resides above the "underlay" computer network consisting of physical links,routers and hosts. the edges in overlay network are node which contains many physical links and routers, logically connected.
+
+R24. Consider a DHT with a mesh overlay topology (that is, every peer tracks all peers in the system). What are the advantages and disadvantages of such a design? What are the advantages and disadvantages of a circular DHT (with no shortcuts)?
+
+advantages: every peer kown all other peers, it's convience for query, and peer information will keep safely.
+disadvantages: it's a big problem for each peer to manipulate all the peers information, and it's hard to update information if a new peer join.
+
+circular DHT
+
+advantages: it easy for peer to manipulate other peers information beacuse each peer only know two peers.
+disadvantages: easyly lost information if some peer leave,not convient for query.
+
+R25. List at least four different applications that are naturally suitable for P2P architectures. (Hint: File distribution and instant messaging are two.)
+
+    a) File Distribution
+    b) Instant Messaging
+    c) Video Streaming
+    d) Distributed Computing
+
+### SECTION2.7
+
+R26. In Section 2.7, the UDP server described needed only one socket, whereas the TCP server needed two sockets. Why? If the TCP server were to support n simultaneous connections, each from a different client host, how many sockets would the TCP server need?
+
+With the UDP server, there is no welcoming socket, and all data from different clients enters the server through this one socket. With the TCP server, there is a welcoming socket, and each time a client initiates a connection to the server, a new socket is created. Thus, to support n simultaneous connections, the server would need n+1 sockets..
+
+R27. For the client-server application over TCP described in Section 2.7, why must the server program be executed before the client program? For the clientserver application over UDP, why may the client program be executed before the server program?
+
+If the TCP server is not running, then the client will fail to make a connection.
+
+For the UDP application, the client does not initiate connections (or attempt to communicate with the UDP server) immediately upon execution
 
 Socket Programing Assignments
 
