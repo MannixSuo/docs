@@ -205,7 +205,7 @@ Answer:
     4. FTTH(faber to the home); home access
     5. AONs(active optical networks);home access
     6. PONs(passive optical networks);home access
-    7. Ethernet;enterprise home 
+    7. Ethernet;enterprise home
     8. WiFi;enterprise home
     9. 3G(third-generation wireless);wide-area
     10. 4G(fourth-generation wireless);wide area
@@ -244,11 +244,11 @@ WiFi(802.11): In a wireless LAN,users transmit/reveive packets from a router wit
 
 SECTION 1.3
 
-R11. Suppose there is exactly one packet switch between a sending host and a receiving host. The transmission rates between the sending host and the switch and between the switch and the receiving host are R1 and R2, respectively. Assuming that the switch uses store-and-forward packet switching, what is the total end-to-end delay to send a packet of length L? (Ignore queuing, propagation delay, and processing delay.) 
+R11. Suppose there is exactly one packet switch between a sending host and a receiving host. The transmission rates between the sending host and the switch and between the switch and the receiving host are R1 and R2, respectively. Assuming that the switch uses store-and-forward packet switching, what is the total end-to-end delay to send a packet of length L? (Ignore queuing, propagation delay, and processing delay.)
 
     L/R1 + L/R2
 
-R12. What advantage does a circuit-switched network have over a packet-switched network? What advantages does TDM have over FDM in a circuit-switched network? 
+R12. What advantage does a circuit-switched network have over a packet-switched network? What advantages does TDM have over FDM in a circuit-switched network?
 
 circuit-switched network has guaranteed bandwidth.Time division multiplexing (TDM) has an advantage over Frequency division multiplexing(FDM) as it gives bandwidth saving and there is low interference between multiplexed signals.
 
@@ -299,7 +299,7 @@ Problems
 
 P1. Design and describe an application-level protocol to be used between an automatic teller machine and a bank’s centralized computer. Your protocol should allow a user’s card and password to be verified, the account balance (which is maintained at the centralized computer) to be queried, and an account withdrawal to be made (that is, money disbursed to the user). Yourprotocol entities should be able to handle the all-too-common case in which there is not enough money in the account to cover the withdrawal. Specify your protocol by listing the messages exchanged and the action taken by the automatic teller machine or the bank’s centralized computer on transmission and receipt of messages. Sketch the operation of your protocol for the case of a simple withdrawal with no errors, using a diagram similar to that in Figure 1.2. Explicitly state the assumptions made by your protocol about the underlying end-to-end transport service.
 
-P2. Equation 1.1 gives a formula for the end-to-end delay of sending one packet of length L over N links of transmission rate R. Generalize this formula for sending P such packets back-to-back over the N links. 
+P2. Equation 1.1 gives a formula for the end-to-end delay of sending one packet of length L over N links of transmission rate R. Generalize this formula for sending P such packets back-to-back over the N links.
 
 P3. Consider an application that transmits data at a steady rate (for example, the sender generates an N-bit unit of data every k time units, where k is small and fixed). Also, when such an application starts, it will continue running for a relatively long period of time. Answer the following questions, briefly justifying your answer: a. Would a packet-switched network or a circuit-switched network be more appropriate for this application? Why? b. Suppose that a packet-switched network is used and the only traffic in this network comes from such applications as described above. Furthermore, assume that the sum of the application data rates is less than the capacities of each and every link. Is some form of congestion control needed? Why?
 
@@ -319,11 +319,11 @@ P10. Consider a packet of length L which begins at end system A and travels over
 
 P11. In the above problem, suppose R1 = R2 = R3 = R and dproc = 0. Further suppose the packet switch does not store-and-forward packets but instead immediately transmits each bit it receives before waiting for the entire packet to arrive. What is the end-to-end delay?
 
-P12. A packet switch receives a packet and determines the outbound link to which the packet should be forwarded. When the packet arrives, one other packet is halfway done being transmitted on this outbound link and four other packets are waiting to be transmitted. Packets are transmitted in order of arrival. Suppose all packets are 1,500 bytes and the link rate is 2 Mbps. What is the queuing delay for the packet? More generally, what is the queuing delay when all packets have length L, the transmission rate is R, x bits of the currently-being-transmitted packet have been transmitted, and n packets are already in the queue? 
+P12. A packet switch receives a packet and determines the outbound link to which the packet should be forwarded. When the packet arrives, one other packet is halfway done being transmitted on this outbound link and four other packets are waiting to be transmitted. Packets are transmitted in order of arrival. Suppose all packets are 1,500 bytes and the link rate is 2 Mbps. What is the queuing delay for the packet? More generally, what is the queuing delay when all packets have length L, the transmission rate is R, x bits of the currently-being-transmitted packet have been transmitted, and n packets are already in the queue?
 
 P13. (a) Suppose N packets arrive simultaneously to a link at which no packets are currently being transmitted or queued. Each packet is of length L and the link has transmission rate R. What is the average queuing delay for the N packets? (b) Now suppose that N such packets arrive to the link every LN/R seconds. What is the average queuing delay of a packet?
 
-P14. Consider the queuing delay in a router buffer. Let I denote traffic intensity; that is, I = La/R. Suppose that the queuing delay takes the form IL/R (1 – I) for I < 1. a. Provide a formula for the total delay, that is, the queuing delay plus the transmission delay. b. Plot the total delay as a function of L/R. 
+P14. Consider the queuing delay in a router buffer. Let I denote traffic intensity; that is, I = La/R. Suppose that the queuing delay takes the form IL/R (1 – I) for I < 1. a. Provide a formula for the total delay, that is, the queuing delay plus the transmission delay. b. Plot the total delay as a function of L/R.
 
 P15. Let a denote the rate of packets arriving at a link in packets/sec, and let μ denote the link’s transmission rate in packets/sec. Based on the formula for the total delay (i.e., the queuing delay plus the transmission delay) derived in the previous problem, derive a formula for the total delay in terms of a and μ.
 
@@ -346,7 +346,7 @@ P23. Consider Figure 1.19(a). Assume that we know the bottleneck link along the 
 
 P24. Suppose you would like to urgently deliver 40 terabytes data from Boston to Los Angeles. You have available a 100 Mbps dedicated link for data transfer. Would you prefer to transmit the data via this link or instead use FedEx overnight delivery? Explain.
 
-P25. Suppose two hosts, A and B, are separated by 20,000 kilometers and are connected by a direct link of R = 2 Mbps. Suppose the propagation speed over the link is 2.5  108 meters/sec. a. Calculate the bandwidth-delay product, R  dprop. b. Consider sending a file of 800,000 bits from Host A to Host B. Suppose the file is sent continuously as one large message. What is the maximum number of bits that will be in the link at any given time? c. Provide an interpretation of the bandwidth-delay product. d. What is the width (in meters) of a bit in the link? Is it longer than a football field? e. Derive a general expression for the width of a bit in terms of the propagation speed s, the transmission rate R, and the length of the link m. 
+P25. Suppose two hosts, A and B, are separated by 20,000 kilometers and are connected by a direct link of R = 2 Mbps. Suppose the propagation speed over the link is 2.5  108 meters/sec. a. Calculate the bandwidth-delay product, R  dprop. b. Consider sending a file of 800,000 bits from Host A to Host B. Suppose the file is sent continuously as one large message. What is the maximum number of bits that will be in the link at any given time? c. Provide an interpretation of the bandwidth-delay product. d. What is the width (in meters) of a bit in the link? Is it longer than a football field? e. Derive a general expression for the width of a bit in terms of the propagation speed s, the transmission rate R, and the length of the link m.
 
 P26. Referring to problem P25, suppose we can modify R. For what value of R is the width of a bit as long as the length of the link?
 
@@ -358,7 +358,7 @@ P30. Consider the airline travel analogy in our discussion of layering in Sectio
 
 P31. In modern packet-switched networks, including the Internet, the source host segments long, application-layer messages (for example, an image or a music file) into smaller packets and sends the packets into the network. The receiver then reassembles the packets back into the original message. We refer to this process as message segmentation. Figure 1.27 illustrates the end-to-end transport of a message with and without message segmentation. Consider a message that is 8 · 106 bits long that is to be sent from source to destination in Figure 1.27. Suppose each link in the figure is 2 Mbps. Ignore propagation, queuing, and processing delays. a. Consider sending the message from source to destination without message segmentation. How long does it take to move the message from the source host to the first packet switch? Keeping in mind that each switch uses store-and-forward packet switching, what is the total time to move the message from source host to destination host? b. Now suppose that the message is segmented into 800 packets, with each packet being 10,000 bits long. How long does it take to move the first packet from source host to the first switch? When the first packet is being sent from the first switch to the second switch, the second packet is being sent from the source host to the first switch. At what time will the second packet be fully received at the first switch? c. How long does it take to move the file from source host to destination host when message segmentation is used? Compare this result with your answer in part (a) and comment. d. In addition to reducing delay, what are reasons to use message segmentation? e. Discuss the drawbacks of message segmentation.
 
-P32. Experiment with the Message Segmentation applet at the book’s Web site. Do the delays in the applet correspond to the delays in the previous problem? How do link propagation delays affect the overall end-to-end delay for packet switching (with message segmentation) and for message switching? 
+P32. Experiment with the Message Segmentation applet at the book’s Web site. Do the delays in the applet correspond to the delays in the previous problem? How do link propagation delays affect the overall end-to-end delay for packet switching (with message segmentation) and for message switching?
 
 P33. Consider sending a large file of F bits from Host A to Host B. There are three links (and two switches) between A and B, and the links are uncongested (that is, no queuing delays). Host A segments the file into segments of S bits each and adds 80 bits of header to each segment, forming packets of L = 80 + S bits. Each link has a transmission rate of R bps. Find the value of S that minimizes the delay of moving the file from Host A to Host B. Disregard propagation delay.
 

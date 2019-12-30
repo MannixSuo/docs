@@ -11,7 +11,9 @@ use_math: false
 
     1. Network Application Architectures
 
-        From the application developer’s perspective, the network architecture is fixed and provides a specific set of services to applications. The application architecture, on the other hand, is designed by the application developer and dictates how the application is structured over the various end systems.
+        From the application developer’s perspective, the network architecture is fixed and provides a
+        specific set of services to applications. The application architecture, on the other hand, is
+        designed by the application developer and dictates how the application is structured over the various end systems.
 
         client-server architecture and peer-to-peer architecture
 
@@ -29,7 +31,9 @@ use_math: false
 
         Client and Server Processes
 
-        * In the context of a communication session between a pair of processes, the process that initiates the communication (that is, initially contacts the other process at the beginning of the session) is labeled as the client. The process that waits to be contacted to begin the session is the server.
+        * In the context of a communication session between a pair of processes, the process that initiates
+        the communication (that is, initially contacts the other process at the beginning of the session)
+        is labeled as the client. The process that waits to be contacted to begin the session is the server.
 
         The Interface Between the Process and the Computer Network
 
@@ -594,6 +598,80 @@ R27. For the client-server application over TCP described in Section 2.7, why mu
 If the TCP server is not running, then the client will fail to make a connection.
 
 For the UDP application, the client does not initiate connections (or attempt to communicate with the UDP server) immediately upon execution
+
+## Problems
+
+P1. True or false
+
+    a. A user requests a Web page that consists of some text and three images. For this page,the client will send one request message and receive four response messages.
+
+    False
+
+    b. Two distinct Web pages can be sent over the same persistent connection.
+
+    Ture
+
+    c. With nonpersistent connections between browser and origin server,it is possible for a single TCP segment to carry two distinct http request message.
+
+    False
+    
+    d. The `Date:` header in the HTTP response message indicates when the object in the response was last modified.
+
+    True
+
+    e. HTTP response messages never have an empty message body.
+
+    False
+
+P2. Read RFC 959 for FTP,List all of the client commands that supported by the RFC.
+
+    CDUP - Change to Parent Directory
+    SMNT - Structure Mount
+    STOU - Store Unique
+    RMD - Remove Directory
+    MKD - Make Directory
+    PWD - Print Directory
+    SYST - System
+    USER NAME (USER)
+    PASSWORD (PASS)
+    ACCOUNT (ACCT)
+    CHANGE WORKING DIRECTORY (CWD)
+    STRUCTURE MOUNT (SMNT)
+    REINITIALIZE (REIN)
+    LOGOUT (QUIT)
+    DATA PORT (PORT)
+    PASSIVE (PASV)
+    REPRESENTATION TYPE (TYPE)
+    FILE STRUCTURE (STRU)
+    TRANSFER MODE (MODE)
+
+P3. Consider and HTTP client that wants to retrieve a Web document at a given URL. The IP address of the HTTP server is initially unknow. What transport and application-layer protocols besides HTTP are needed in this scenario.
+
+Http use TCP transport,and DNS protocol.
+
+P4. Consider the following string of ASCIIcharacters that were captured by Wireshark when the browser sent an HTTP GET message. The characters `<cr><lf>`are carriage return and line-feed characters.Answer the following questuibs, indicating where in the HTTP GET message below you find the answer.
+
+    GET /cs453/index.html HTTP/1.1<cr><lf>Host: gai a.cs.umass.edu<cr><lf>User-Agent: Mozilla/5.0 ( Windows;U; Windows NT 5.1; en-US; rv:1.7.2) Gec ko/20040804 Netscape/7.2 (ax) <cr><lf>Accept:ex t/xml, application/xml, application/xhtml+xml, text /html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5 <cr><lf>Accept-Language: en-us,en;q=0.5<cr><lf>AcceptEncoding: zip,deflate<cr><lf>Accept-Charset: ISO -8859-1,utf-8;q=0.7,*;q=0.7<cr><lf>Keep-Alive: 300<cr> <lf>Connection:keep-alive<cr><lf><cr><lf>
+
+a. What is the URL of the document requested by the browser?
+
+    /cs453/index.html
+
+b. What version of HTTP is the browser running?
+
+    HTTP/1.1
+
+c. Does the browser request a non-persistent or a persistent connection?
+
+    persistent connection
+
+d. What is the IP address of the host on which the browser is running?
+
+    This is a trick question. This information is not contained in an HTTP message anywhere. So there is no way to tell this from looking at the exchange of HTTP messages alone. One would need information from the IP datagrams (that carried the TCP segment that carried the HTTP GET request) to answer this question .
+
+e. What type of browser initiates this message? Why is the browser type needed int an HTTP request message?
+
+    Mozilla/5.0. The browser type information is needed by the server to send different versions of the same object to different types of browsers.
 
 Socket Programing Assignments
 
