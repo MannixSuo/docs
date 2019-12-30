@@ -18,7 +18,7 @@ There are times when a program needs to manipulate a tree data structure and it 
 
 The figure below shows a UML class diagram for the Composite Pattern:
 
-![composite pattern](/pictures/composite-design-pattern-implementation-uml-class-diagram.png)
+![composite pattern](/pictures/pattern/composite-design-pattern-implementation-uml-class-diagram.png)
 
 * **Component** - Component is the abstraction for leafs and composites. It defines the interface that must be implemented by the objects in the composition. For example a file system resource defines move, copy, rename, and getSize methods for files and folders.
 
@@ -228,7 +228,7 @@ public class GraphicsEditor {
 
 **Alternative Implementation :** Note that in the previous example there were times when we have avoided dealing with composite objects through the Shape interface and we have specifically dealt with them as composites (when using the method addToShape()). To avoid such situations and to further increase uniformity one can add methods to add, remove, as well as get child components to the Shape interface. The UML diagram below shows it:
 
-![alternative implementation](/pictures/composite-design-pattern-alternative-implementation-uml-class-diagram.png)
+![alternative implementation](/pictures/pattern/composite-design-pattern-alternative-implementation-uml-class-diagram.png)
 
 ```java
 /**

@@ -20,7 +20,7 @@ The abstraction privided by the iterator pattern allows you to modify the collec
 
 ## Implementation
 
-![iterator-pattern](/pictures/iterator_implementation_-_uml_class_diagram.gif)
+![iterator-pattern](/pictures/pattern/iterator_implementation_-_uml_class_diagram.gif)
 
 ### Applicability & Examples
 

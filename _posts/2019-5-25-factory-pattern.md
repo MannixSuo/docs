@@ -22,7 +22,7 @@ You can also check the original Factory Method pattern which is very similar.
 
 ## Implementation
 
-![factory implementation](/pictures/factory_implementation.gif)
+![factory implementation](/pictures/pattern/factory_implementation.gif)
 
 The implementation is really simple
 
@@ -57,7 +57,7 @@ modifying the factory class.
 
 ### Procedural Solution - siwtch/case noob instantiation.
 
-![factory noob implementation](/pictures/factory noob implementation.gif)
+![factory noob implementation](/pictures/pattern/factory noob implementation.gif)
 
 Those are also known as parameterized Factories. The generating method can be written so that
 it can generate more types of Product objects, using a condition(entered as a method parameter
@@ -221,7 +221,7 @@ class AnotherProduct extends Product
 
 ## A more advanced solution - Factory design pattern with abstractions(Factory Method)
 
-![factory design pattern with abstractions](/pictures/factory design pattern with abstractions.gif)
+![factory design pattern with abstractions](/pictures/pattern/factory design pattern with abstractions.gif)
 
 This implementation represents an alternative for the class registration implementation. Let's assume
 we need to add a new prodcut to the application. For the prcedural switch-case implementation we need

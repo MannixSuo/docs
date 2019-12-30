@@ -31,7 +31,7 @@ objects, without explicitly specifying their classes.
 
 The pattern basically works as shown below, in the UML diagram:
 
-![abstract-factory](/pictures/abstract-factory-pattern.png)
+![abstract-factory](/pictures/pattern/abstract-factory-pattern.png)
 
 The classes that participate to the Abstract Factory pattern are:
 

@@ -29,7 +29,7 @@ dynamically to an object.
 The figure below shows a UML class diagram for the Decorator
 Pattern:
 
-![decorator pattern implementation](/pictures/decorator-design-pattern-implementation-uml-class-diagram.png)
+![decorator pattern implementation](/pictures/pattern/decorator-design-pattern-implementation-uml-class-diagram.png)
 
 The participants classes in the decorator pattern are:
 
@@ -51,7 +51,7 @@ number of responsilities that can add and mixed togther.
 
 Example - Extending capabilities of a Graphical Window at runtime.
 
-![example](/pictures/decorator-design-pattern-example-uml-class-diagram.png)
+![example](/pictures/pattern/decorator-design-pattern-example-uml-class-diagram.png)
 
 In Graphic User Interface toolkit windows behaviors can be add
 dynamically by using decorator design pattern.

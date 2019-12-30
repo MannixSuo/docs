@@ -15,7 +15,7 @@ On the same idea is the template method is based. A template method defines an a
 
 * Template Method lets subclasses redefine certain steps of an algorithm without letting them to change the algorithm's structure.
 
-![template method](/pictures/template_method_implementation_-_uml_class_diagram.gif)
+![template method](/pictures/pattern/template_method_implementation_-_uml_class_diagram.gif)
 
 ## Implementation
 
@@ -39,7 +39,7 @@ The tempalte Method pattern should be used:
 
 ## Example - Application used by a travel agency.
 
-![travel agency](/pictures/template_method_example_trips_-_uml_class_diagram.gif)
+![travel agency](/pictures/pattern/template_method_example_trips_-_uml_class_diagram.gif)
 
 Let's assume we have to develop an application for a travel agency. The travel agency is managing each trip. All the trips contain common behavior but there are serveral packages. For example each trip contains the basic steps:
 

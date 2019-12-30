@@ -20,7 +20,7 @@ The intent of this pattern is to provide a `Plactholder` for an object to contro
 
 The figure below shows a UML class diagram for the Proxy Pattern:
 
-![proxy pattern](/pictures/proxy-design-pattern-implementation-uml-class-diagram.png)
+![proxy pattern](/pictures/pattern/proxy-design-pattern-implementation-uml-class-diagram.png)
 
 The participants classes in the proxy pattern are:
 
@@ -58,7 +58,7 @@ The Proxy design pattern is applicable when there is a need to control access to
 
 Consider an image viewer program that lists and displays high resolution photos. The program has to show a list of photos however it does not need to display the actual photo until the user selects an image item from a list.
 
-![proxy](/pictures/proxy-design-pattern-image-example-uml-class-diagram.png)
+![proxy](/pictures/pattern/proxy-design-pattern-image-example-uml-class-diagram.png)
 
 The code below shows the Image interface representing the Subject. The interface has a single method showImage() that the concrete images must implement it to render an image to screen.
 

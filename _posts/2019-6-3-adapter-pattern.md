@@ -19,7 +19,7 @@ What about software development? It's the same. Can you imagine an situation whe
 
 The figure below shows a UML class diagram for the Adapter Pattern:
 
-![adapter](/pictures/adapter-pattern.png)
+![adapter](/pictures/pattern/adapter-pattern.png)
 
 The classes/objects participating in adapter pattern:
 > **Tatget** - defines the domain-specific interface that
@@ -53,7 +53,7 @@ Object Adapters are the classical example of the adapter pattern. It uses compos
 
 ### Class Adapters - Based on Multiple Inheritance
 
-![Class Adapters](/pictures/adapter-pattern-multiple-inheritance.png)
+![Class Adapters](/pictures/pattern/adapter-pattern-multiple-inheritance.png)
 
 Class adapters can be implemented in languages supporting multiple inheritance. Thus, such adapters can not be easy implemented in Java,C# or VB.NET. Class adapter uses inheritance instead of composition. It means that instead of delegating the calls to the Adaptee, it subclasses it. In conclusion it must subclass both the Target and the Adaptee. There are advantages and disadvantages:
 

@@ -20,7 +20,7 @@ The Macro represents a command that is built from the reunion of a set of other 
 
 The idea and implementation of the Command design pattern is quite simple, as we will see in the diagram below, needing only few extra classes implemented.
 
-![command_implementation](/pictures/command_implementation_-_uml_class_diagram.gif)
+![command_implementation](/pictures/pattern/command_implementation_-_uml_class_diagram.gif)
 
 The classes participating in the pattern:
 
@@ -38,7 +38,7 @@ The Client asks for a command to be executed. The Invoker takes the command, enc
 
 Here is a simple code of a classic implementation of this pattern for placing orders for buying and selling stocks:
 
-![command_example_stocks](/pictures/command_example_stocks_-_uml_class_diagram_s.gif)
+![command_example_stocks](/pictures/pattern/command_example_stocks_-_uml_class_diagram_s.gif)
 
 The client creates some orders for buying and selling stocks(ConcreteCommands). Then the orders are sent to the agent(Invoker). The agent takes the orders and place them to the StockTrade sysetm(Receiver). The agent keeps an internal queue with the order to be placed. Let's assume that the StockTrade system is closed each Monday, but the agent accepts orders and queue them to be processed later on.
 
@@ -128,7 +128,7 @@ There are three commands in this example PlayCommand,RewindCommand,StopCommand. 
 
 cassette player is a typically command pattern. it decouple Julia and the cassette player.
 
-![cassette player](/pictures/cassette_player.webp)
+![cassette player](/pictures/pattern/cassette_player.webp)
 
 ### Example Code
 
@@ -242,7 +242,7 @@ public class Julia {
 
 Suppose the audioPlayer has a record feature, it can remember commands have been executed then can execute these commands when the macro button is pressed.
 
-![macro](/pictures/macro_command.webp)
+![macro](/pictures/pattern/macro_command.webp)
 
 ### Code
 

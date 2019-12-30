@@ -26,7 +26,7 @@ time.
 The implementation involves a static member in the 'Singleton' class, a private constructor and a static public method that returns a reference to
 the static member.
 
-![singleton_implementation](/pictures/singleton_implementation_-_uml_class_diagram.gif)
+![singleton_implementation](/pictures/pattern/singleton_implementation_-_uml_class_diagram.gif)
 
 The Singleton Pattern defines a getInstance operation which exposes the unique instance which is accessed by the clients. *getInstance()* is responsible for creating its class in case it is not created yet and return that instance.
 

@@ -25,7 +25,7 @@ Factory Method is the hotel. When staying in a hotel you first have to check in.
 
 The pattern basically works as shown below, in the UML diagram:
 
-![factory method implementation](/pictures/factory method implementation - uml class diagram.gif)
+![factory method implementation](/pictures/pattern/factory method implementation - uml class diagram.gif)
 
 The participants classes in this pattern are:
 
