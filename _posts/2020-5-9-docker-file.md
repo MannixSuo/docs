@@ -312,5 +312,7 @@ ADD test.txt /absoluteDir/
 Note:
 
 1. `<src>`必须在`context`中
-2. 如果`<src>`是url文件，并且`<dest>`不以
+2. 如果`<src>`是url文件，并且`<dest>`不以`/`结尾，那么文件名叫叫做`<dest>`
+3. 如果`<src>`是url文件，并且`<dest>`以`/`结尾，那么文件名就根据url来判断，保存成`<dest>/不能识别到文件名的。
+
 
