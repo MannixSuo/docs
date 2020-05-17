@@ -80,7 +80,7 @@ Successfully built 7ea8aef582cc
 
 ```
 
-Format
+### Format
 
 Dockerfile指令的格式：
 
@@ -110,7 +110,7 @@ Parser directives
 
 当前支持两个解析器参数:syntax,escape
 
-Syntax
+### Syntax
 
 语法格式:
 
@@ -176,7 +176,7 @@ COPY \$foo /quux # COPY $foo /quux
 
 ```
 
-From
+### From
 
 ```dockerfile
 
@@ -190,7 +190,7 @@ FROM [--platform=<platform>] <image>[@<digest>] [AS <name>]
 
 form命令初始化一个新的构建层，并且下面的命令都是在这个基本镜像上面进行操作。
 
-RUN
+### RUN
 
 * `RUN <command>` (shell格式,相当于执行一个shell命令，默认是`/bin/sh -c`)
 * `RUN ["executable", "param1", "param2"]` (exec 格式)
@@ -210,7 +210,7 @@ RUN ["/bin/bash", "-c", "echo hello"]
 
 ```
 
-CMD
+### CMD
 
 用于指定默认的容器主进程的启动命令
 每个dockerfile只能有一个CMD命令，存在多个的话只有最后一个会生效。
@@ -221,7 +221,7 @@ CMD
 
 `CMD command param1 param2`
 
-LABEL
+### LABEL
 
 ```dockerfile
 
@@ -254,7 +254,7 @@ docker run -p 80:80/tcp -p 80:80/udp ...
 
 ```
 
-ENV
+### ENV
 
 env命令是用来设置环境变量的，设置好以后其他命令就能获取到环境变量的值。
 
@@ -276,7 +276,7 @@ ENV myCat fluffy
 
 在执行docker命令时可对env进行覆盖`docker run --env <key>=<value>`
 
-ADD
+### ADD
 
 add有两种形式
 
@@ -314,5 +314,47 @@ Note:
 1. `<src>`必须在`context`中
 2. 如果`<src>`是url文件，并且`<dest>`不以`/`结尾，那么文件名叫叫做`<dest>`
 3. 如果`<src>`是url文件，并且`<dest>`以`/`结尾，那么文件名就根据url来判断，保存成`<dest>/不能识别到文件名的。
+4. 如果`<src>`是文件夹，那么文件夹内的所有数据都会被拷贝，文件夹本身不会被拷贝。
+5. 如果`<src>`是一个本地压缩文件(identity, gzip, bzip2 or xz)，会被自动解压缩成文件夹，相当于执行了`tar -x`,如果文件重名了，会以`2.`命名。
+6. `<src>`中的一般文件都会根据文件的元属性处理，如果`<dest>`以`/`结尾，src中的文件都会被放在`<dest>/base(<src>)`
+7. 如果指定多个`<src>`则`<dest>`必须要以`/`结尾
+8. 如果`<dest>`不以`/`结尾就代表dest是个文件，则src中的文件以及内容会写到dest这个文件内
+9. 如果`<dest>`不存在，它将与路径中所有缺少的目录一起创建。
 
+### COPY
 
+```dockerfile
+
+COPY [--chown=<user>:<group>] <src>... <dest>
+COPY [--chown=<user>:<group>] ["<src>",... "<dest>"]
+
+```
+
+COPY命令将`<src>`中的文件添加到容器的`<dest>`路径中。
+
+可以指定了多个`<src>`，`<src>`的路径是相对于当前构建的`context`的。
+
+同ADD，`<src>`的路径也可以使用go语言的路径匹配机制
+
+copy不能从url下载文件而add可以
+
+### ENTRYPOINT
+
+```dockerfile
+# exec form
+ENTRYPOINT ["executable", "param1", "param2"]
+# shell form
+ENTRYPOINT command param1 param2
+
+```
+
+ENTRYPOINT 将容器配置成可执行的。
+
+```dockerfile
+docker run -i -t --rm -p 80:80 nginx
+```
+
+命令 `docker run <image>` 的参数会被添加到exec form类型的ENTRYPOINT，并且会覆盖 CMD命令中的参数。
+`docker run <image> -d `会将 `-d` 参数传递给， ENTRYPOINT
+
+ENTRYPOINT执行的命令 PID是1，cmd是`/bin/sh -c` 的子命令，pid不是1
