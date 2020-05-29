@@ -10,7 +10,8 @@ tags: algorithms
 
 解法1：
 三个动点：i j k.
-i是要扫描的点,j是数组前面不重复元素的坐标,k是判断0-j中的元素是否和i相等。
+i是要扫描的点,j是数组前面不重复元素的坐标,k是判断0-j中的元素是否和i相等。没有相等的，
+j++,i++再判断一轮
 `___k__j_i_____`
 
 ```golang
@@ -65,7 +66,7 @@ currentIndex是数组前面不重复元素的个数
 
 start end
 
-`0_____start>_____<end_____currentIndex>__nextIndex>___len`中的坐标,应该比解法一快
+`0_____start>_____<end_____currentIndex>__nextIndex>___len`中的坐标`<>代表移动方向`,应该比解法一快
 
 ```golang
 
