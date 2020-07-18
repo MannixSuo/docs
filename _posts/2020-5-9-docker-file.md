@@ -354,7 +354,17 @@ ENTRYPOINT 将容器配置成可执行的。
 docker run -i -t --rm -p 80:80 nginx
 ```
 
-命令 `docker run <image>` 的参数会被添加到exec form类型的ENTRYPOINT，并且会覆盖 CMD命令中的参数。
-`docker run <image> -d `会将 `-d` 参数传递给， ENTRYPOINT
+命令 `docker run <image>` 的参数会被添加到exec form类型的ENTRYPOINT后面，对于CMD命令中的参数会被覆盖而不是添加到参数后面。
+比如： ` docker run <image> -d `会生成` ENTRYPOINT["a","b","-d"] `,会覆盖 ` CMD["a","b"] ` 生成` CMD["-d"] `。
 
 ENTRYPOINT执行的命令 PID是1，cmd是`/bin/sh -c` 的子命令，pid不是1
+
+### ARG
+
+```dockerfile
+ARG <name>[=<default value>]
+```
+
+ARG 参数定义了一个变量，可以在执行` docker build `命令时通过` --build-arg <varname>=<value> `来指定变量的值。
+
+Arg命令在使用` docker history `查看的时候会显示出来，所以密码什么的不能通过arg传递。
