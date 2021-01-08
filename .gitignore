@@ -6,3 +6,4 @@ Gemfile.lock
 *.c
 .vscode
 .idea
+.jekyll-cache

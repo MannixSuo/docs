@@ -20,7 +20,25 @@ The intent of this pattern is to provide a `Plactholder` for an object to contro
 
 The figure below shows a UML class diagram for the Proxy Pattern:
 
-![proxy pattern](/pictures/pattern/proxy-design-pattern-implementation-uml-class-diagram.png)
+```mermaid
+classDiagram
+    class Proxy{
+		doOperation() void
+	}
+	class Subject{
+		<<interface>>
+        doOperation() void
+	}
+	class RealSubject{
+		doOperation() void
+	}
+	class Client{
+	}
+	Client --> Subject
+	Proxy ..|> Subject
+	Proxy --> RealSubject : "doOperation() can execute code before calling realSubject.doOperation() as well as after the execution."
+	RealSubject ..|> Subject
+```
 
 The participants classes in the proxy pattern are:
 
@@ -58,11 +76,29 @@ The Proxy design pattern is applicable when there is a need to control access to
 
 Consider an image viewer program that lists and displays high resolution photos. The program has to show a list of photos however it does not need to display the actual photo until the user selects an image item from a list.
 
-![proxy](/pictures/pattern/proxy-design-pattern-image-example-uml-class-diagram.png)
+```mermaid
+classDiagram
+    class ImageViewer{
+	}
+	class Image{
+		<<interface>>
+		showImage() void
+	}
+	class ProxyImage{
+		showImage() void
+	}
+	class HighResolutionImage{
+		showImage() void
+	}
+	ImageViewer --> Image
+	ProxyImage ..|> Image
+	HighResolutionImage ..|> Image
+	ProxyImage "1" --> "1.*" HighResolutionImage : "ProxyImage.showImage() loads and display the real image only when it is needed"
+```
 
 The code below shows the Image interface representing the Subject. The interface has a single method showImage() that the concrete images must implement it to render an image to screen.
 
-```java
+```Java
 /**
  * Subject Interface
  */
@@ -74,7 +110,7 @@ public interface Image {
 ```
 The code below shows the Proxy implementation, the image proxy is a virtual proxy that creates and loads the actual image object on demand, thus saving the cost of loading an image into memory until it needs to be rendered:
 
-```java
+```Java
 /**
  * Proxy
  */
@@ -112,7 +148,7 @@ public class ImageProxy implements Image {
 
 The code below displays the RealSubject Implementation which is the concrete and heavyweight implementation of the image interface. The High resolution image loads a high resolution image from disk, and renders it to screen when showImage() is called:
 
-```java
+```Java
 
 /**
  * RealSubject
@@ -143,7 +179,7 @@ public class HighResolutionImage implements Image {
 
 The code below illustrates a asmple image viewer program; the program simply loads three images, and renders only one image, once using the proxy pattern and another use directly. Note that when using the proxy pattern, although three images have been loaded, the high resolution image is not loaded into memory until it needs to be rendered, while in the part not using the proxy,three images are loaded into memory alough only one of them is actually rendered.
 
-```java
+```Java
 
 package proxy;
 

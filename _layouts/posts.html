@@ -8,7 +8,8 @@ use_math: false
 <p class="view">author: {{ page.author | default: site.author }}</p>
 
 {{content}}
-
+<script src="{{ '/assets/js/mermaid.min.js' | relative_url }}"></script>
+<script>mermaid.init({}, ".language-mermaid");</script>
 {% if page.tags %}
   <small>tags: <em>{{ page.tags | join: "</em> - <em>" }}</em></small>
 {% endif %}

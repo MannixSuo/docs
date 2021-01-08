@@ -1,4 +1,7 @@
 @import "base_color";
+@import "index";
+@import "post";
+
 
 html {
     font-family: 'consolas', cursive;
@@ -25,6 +28,7 @@ pre ,blockquote{
     background-color:$codeBackgroundColor;
     margin: 0 auto;
 }
+
 .container {
     margin: 0 auto;
     width: 65%;
