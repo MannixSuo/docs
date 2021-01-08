@@ -1,0 +1,191 @@
+I"�$<h2 id="virtualization">Virtualization</h2>
+
+<h3 id="4the-abstraction-the-process">4.The Abstraction: The Process</h3>
+
+<p>Proceees is one of the most fundamental abstractions that the OS providers to users.</p>
+
+<p>It represent a running process.</p>
+
+<p>Os virtualize Cpu so that user can run more than one program(process) at onece.</p>
+
+<p><strong>Time Sharing</strong></p>
+
+<p>Time sharing is a basic technique used by an OS to share a resource. By
+allowing the resource to be used for a little while by one entity, and then
+a little while by another, and so forth, the resource in question (e.g., the
+CPU, or a network link) can be shared by many</p>
+
+<p><strong>Space Sharing</strong></p>
+
+<p>A resource is divided (in space) among those who wish to use it. For example, 
+disk space is naturally a spaceshared resource; once a block is assigned to a file,
+ it is normally not assigned to another file until the user deletes the original file.</p>
+
+<h4 id="41-the-abstraction-a-process">4.1 The Abstraction: A Process</h4>
+
+<p>The abstraction provided by the OS of a running program is something
+we will call a process.</p>
+
+<h4 id="42-process-api">4.2 Process API</h4>
+
+<ul>
+  <li>
+    <p><strong>Create</strong> create new processes</p>
+  </li>
+  <li>
+    <p><strong>Destroy</strong> to destroy processes forcefully.</p>
+  </li>
+  <li>
+    <p><strong>Wait</strong>  wait for a process to stop running</p>
+  </li>
+  <li>
+    <p><strong>Miscellaneous Control</strong> Other than killing or waiting for a process, there are sometimes other controls that are possible.</p>
+  </li>
+  <li>
+    <p><strong>Status</strong> get some status information about a process</p>
+  </li>
+</ul>
+
+<h4 id="43-process-creation-a-little-more-detail">4.3 Process Creation: A Little More Detail</h4>
+
+<p>How OS run a program:</p>
+
+<ol>
+  <li>
+    <p>load its code and any static data (e.g., initialized variables) into memory, into the address space of the process.</p>
+  </li>
+  <li>
+    <p>Some memory must be allocated for the program’s run-time stack (or just stack).(C programs use the stack for local variables, function parameters, and return addresses;)</p>
+  </li>
+  <li>
+    <p>The OS may also allocate some memory for the program’s heap.(. In C programs, the heap is used for explicitly requested dynamically-allocateddata)</p>
+  </li>
+  <li>
+    <p>The OS will also do some other initialization tasks, particularly as related to input/output (I/O).</p>
+  </li>
+</ol>
+
+<h4 id="44-process-states">4.4 Process States</h4>
+
+<ul>
+  <li>
+    <p><strong>Running</strong></p>
+  </li>
+  <li>
+    <p><strong>Ready</strong> In the ready state, a process is ready to run but for some reason the OS has chosen not to run it at this given moment</p>
+  </li>
+  <li>
+    <p><strong>Blocked</strong>  In the blocked state, a process has performed some kind of operation that makes it not ready to run until some other event takes place.(IO)</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            Scheduled
+         &lt;-----------
+running                 Ready
+         -----------&gt;    ^
+    |   Descheduled      |
+    \                    /  
+     \ I/O: initiate    /I/O: done
+      \                /
+        -&gt;   bloked  - 
+
+</code></pre></div></div>
+
+<h4 id="45-data-structures">4.5 Data Structures</h4>
+
+<p>To track the state of each process, for example, the OS likely will keep some kind of <em>process list</em> for all processes that are ready and some additional information to track which process is currently running.</p>
+
+<h3 id="5interlude-process-api">5.Interlude: Process API</h3>
+<h4 id="51-the-fork-system-call">5.1 The fork() System Call</h4>
+
+<p>The fork() system call is used to create a new process,the process that is created is an (almost) exact copy of the calling process.</p>
+
+<p>The newly-created process (called the child, in contrast to the
+creating parent) doesn’t start running at main(), like you might expect
+(note, the “hello, world” message only got printed out once); rather, it
+just comes into life as if it had called fork() itself.</p>
+
+<h4 id="52-the-wait-system-call">5.2 The wait() System Call</h4>
+
+<p>Sometimes, as it turns out, it is quite useful for a parent to wait for a child process to finish what it has been doing. This task is accomplished with the <em>wait()</em> system call (or its more complete sibling <em>waitpid()</em>);</p>
+
+<h4 id="53-finally-the-exec-system-cal">5.3 Finally, The exec() System Cal</h4>
+
+<p>A final and important piece of the process creation API is the <em>exec()</em> system call. This system call is useful when you want to run a program that is different from the calling program.</p>
+
+<h4 id="54-why-motivating-the-api">5.4 Why? Motivating The API</h4>
+
+<p>Well, as it turns out, the separation of fork() and exec() is essential in building a UNIX shell, because it lets the shell run code after the call to fork() but before the call to exec(); this code can alter the environment of the about-to-be-run program, and thus enables a variety of interesting features to be readily built.</p>
+
+<h4 id="55-process-control-and-users">5.5 Process Control And Users</h4>
+
+<p>Beyond fork(), exec(), and wait(), there are a lot of other interfaces for interacting with processes in UNIX systems. For example, the kill() system call is used to send signals to a process, including directives to pause, die, and other useful imperatives.</p>
+
+<p>A system generally needs a user who can administer the system, and is not limited in the way most users are. (root)</p>
+
+<h4 id="56-useful-tools">5.6 Useful Tools</h4>
+
+<p>man command 查看命令的详细说明</p>
+
+<p>kill pid 停止进程</p>
+
+<h3 id="6mechanism-limited-direct-execution">6.Mechanism: Limited Direct Execution</h3>
+
+<p>There are a few challenges</p>
+
+<ol>
+  <li>
+    <p><strong>performance:</strong> how can we implement virtualization without adding excessive overhead to the system?</p>
+  </li>
+  <li>
+    <p><strong>control:</strong> how can we run processes efficiently while retaining control over the CPU?</p>
+  </li>
+</ol>
+
+<h4 id="61-basic-technique-limited-direct-execution">6.1 Basic Technique: Limited Direct Execution</h4>
+
+<p>The “direct execution” part of the idea is simple: just run the program directly on the CPU.</p>
+
+<p>issue</p>
+
+<ol>
+  <li>
+    <p>how can the OS make sure the program doesn’t do anything that we don’t want it to do, while still running it efficiently?</p>
+  </li>
+  <li>
+    <p>when we are running a process, how does the operating system stop it from running and switch to another process, thus implementing the time sharing we require to virtualize the CPU?</p>
+  </li>
+</ol>
+
+<h4 id="62-problem-1-restricted-operations">6.2 Problem #1: Restricted Operations</h4>
+
+<p>Thus, the approach we take is to introduce a new processor mode, known as user mode; code that runs in user mode is restricted in what it can do.</p>
+
+<p>In contrast to user mode is kernel mode, which the operating system(or kernel) runs in. In this mode, code that runs can do what it likes, including privileged operations such as issuing I/O requests and executing all types of restricted instructions.</p>
+
+<p>To execute a system call, a program must execute a special trap instruction.</p>
+
+<p>When finished, the OS calls a special return-from-trap instruction</p>
+
+<h4 id="63-problem-2-switching-between-processes">6.3 Problem #2: Switching Between Processes</h4>
+
+<p>How can the operating system regain control of the CPU so that it can switch between processes?</p>
+
+<p><strong>A Cooperative Approach: Wait For System Calls</strong></p>
+
+<p>One approach that some systems have taken in the past (for example,early versions of the Macintosh operating system, or the old Xerox Alto system) is known as the cooperative approach. In this style, the OS trusts the processes of the system to behave reasonably. Processes that run for too long are assumed to periodically give up the CPU so that the OS can decide to run some other task.</p>
+
+<p><strong>A Non-Cooperative Approach: The OS Takes Control</strong></p>
+
+<p>The answer turns out to be simple and was discovered by a number of people building computer systems many years ago: a timer interrupt[M+63]. A timer device can be programmed to raise an interrupt every so many milliseconds; when the interrupt is raised, the currently running process is halted, and a pre-configured interrupt handler in the OS runs. At this point, the OS has regained control of the CPU, and thus can do what it pleases: stop the current process, and start a different one.</p>
+
+<p><strong>Saving and Restoring Context</strong></p>
+
+<p>Note that there are two types of register saves/restores that happen
+during this protocol. The first is when the timer interrupt occurs; in this case, the user registers of the running process are implicitly saved by the hardware, using the kernel stack of that process. The second is when the OS decides to switch from A to B; in this case, the kernel registers are explicitly saved by the software (i.e., the OS), but this time into memory in
+the process structure of the process. The latter action moves the system from running as if it just trapped into the kernel from A to as if it just trapped into the kernel from B.</p>
+
+<h2 id="concurrency">Concurrency</h2>
+
+<h2 id="persistence">Persistence</h2>
+:ET

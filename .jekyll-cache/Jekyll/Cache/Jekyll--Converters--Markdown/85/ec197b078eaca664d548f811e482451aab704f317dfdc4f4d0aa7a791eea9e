@@ -1,0 +1,323 @@
+I"�V<h2 id="motivation">Motivation</h2>
+
+<p>There are times when a program needs to manipulate a tree data structure and it is necessary to treat both Branches as well as Leaf Nodes uniformly. Consider for example a program that manipulates a file system. A file system is a tree structure that contains Branches which are Folders as well as Leaf nodes which are files. Note that a folder object uaually contains one or more file or folder objects and thus is a complex object where a file is a simple object. Note also that since files and folders have many operations and attributes in common, such as moving and copying a file or a folder, listing file or folder attributes such as file name and size, it would be easier and more convenient to treat both file and folder objects uniformly by defining a File System Resource Interface.</p>
+
+<h2 id="intent">Intent</h2>
+
+<ul>
+  <li>
+    <p>The intent of this pattern is to compose objects into tree structures to represent part-whole hierarchies.</p>
+  </li>
+  <li>
+    <p>Composite lets clients treat individual objects and compositions of objects uniformly.</p>
+  </li>
+</ul>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>The figure below shows a UML class diagram for the Composite Pattern:</p>
+
+<p><img src="/pictures/pattern/composite-design-pattern-implementation-uml-class-diagram.png" alt="composite pattern" /></p>
+
+<ul>
+  <li>
+    <p><strong>Component</strong> - Component is the abstraction for leafs and composites. It defines the interface that must be implemented by the objects in the composition. For example a file system resource defines move, copy, rename, and getSize methods for files and folders.</p>
+  </li>
+  <li>
+    <p><strong>Leaf</strong> - Leafs are objects that have no children. They implementing method by the Component interface. For example a file objects implements move, copy, rename, as well as getSize mthods which are related to the Component interface.</p>
+  </li>
+  <li>
+    <p><strong>Composite</strong> - A Composite stores child components in addition to implementing methods defined by the component interface. Composites implement methods defined in the Component interface by delegating to child components. In addition composites pprovide additional methods for adding, removing, as well as geting components.</p>
+  </li>
+  <li>
+    <p><strong>Client</strong> - The client manipulate objects in the hierarchy using the componment interface.</p>
+  </li>
+</ul>
+
+<p>A client has a reference to a tree data structure and needs to perform operations on all nodes independent of the fact that a node might be a branch or a leaf. The client simply obtains reference to the required node using the component interface, and deals with the node using this interface; it doesn’t matter if the node is a composite or a leaf.</p>
+
+<h2 id="applicability--examples">Applicability &amp; Examples</h2>
+
+<p>The composite pattern applies when there is a part-whole hierarchy of objects and a client needs to deal with objects uniformly regardless of the fact that an object might be a leaf or a branch.</p>
+
+<h3 id="example---graphics-drawing-editor">Example - Graphics Drawing Editor</h3>
+
+<p>In graphics editors a shape can be basic or complex. An example of simple shape is a line, where a complex shape is a rectangle which is made of four lines objects. Since shapes have many operations in common such as rendering the shape to screen, and since shapes follow a part-whole hierarchy, composite pattern can be used to enable the program to deal with all shapes uniformly (一致的).</p>
+
+<p>In the example we can see the following actors:</p>
+
+<ul>
+  <li>
+    <p><strong>Shape(Component)</strong> - Shape is the abstraction for Lines, Rectangles(leafs) and ComplexShapes (Composites).</p>
+  </li>
+  <li>
+    <p><strong>Line, Rectangle(Leafs)</strong> - objects that have no children. They implement services described by Shape interface.</p>
+  </li>
+  <li>
+    <p><strong>ComplexShape(Composite)</strong> - A Composite stores child Shapes in addition to implementing methods defined by the Shape interface.</p>
+  </li>
+  <li>
+    <p><strong>GraphicsEditor(Client)</strong> - The GraphicsEditor manipulates Shapes in the hierarchy.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cm">/**
+ * 
+ * Shape is the Component interface
+ *
+ */</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Shape</span> <span class="o">{</span>
+    
+    <span class="cm">/**
+     * Draw shape on screen 
+     * 
+     * Method that must be implemented by Basic as well as 
+     * complex shapes 
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">renderShapeToScreen</span><span class="o">();</span>
+    
+    <span class="cm">/**
+     * Making a complex shape explode results in getting a list of the 
+     * shapes forming this shape 
+     * 
+     *  For example if a rectangle explodes it results in 4 line objects 
+     *  
+     * Making a simple shape explode results in returning the shape itself 
+     */</span>
+    <span class="kd">public</span> <span class="nc">Shape</span><span class="o">[]</span> <span class="nf">explodeShape</span><span class="o">();</span>
+    
+<span class="o">}</span>
+
+<span class="kn">package</span> <span class="nn">composite</span><span class="o">;</span>
+
+<span class="cm">/**
+ * 
+ * Line is a basic shape that does not support adding shapes  
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Line</span> <span class="kd">implements</span> <span class="nc">Shape</span> <span class="o">{</span>
+    <span class="cm">/**
+     * Create a line between point1 and point2
+     * @param point1X
+     * @param point1Y
+     * @param point2X
+     * @param point2Y
+     */</span>
+    <span class="kd">public</span> <span class="nf">Line</span><span class="o">(</span><span class="kt">int</span> <span class="n">point1X</span><span class="o">,</span> <span class="kt">int</span> <span class="n">point1Y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">point2X</span><span class="o">,</span> <span class="kt">int</span> <span class="n">point2Y</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Shape</span><span class="o">[]</span> <span class="nf">explodeShape</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="c1">// making a simple shape explode would return only the shape itself, there are no parts of this shape</span>
+        <span class="nc">Shape</span><span class="o">[]</span> <span class="n">shapeParts</span> <span class="o">=</span> <span class="o">{</span><span class="k">this</span><span class="o">};</span>
+        <span class="k">return</span> <span class="n">shapeParts</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * this method must be implemented in this simple shape
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">renderShapeToScreen</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// logic to render this shape to screen</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="cm">/**
+ * Rectangle is a composite 
+ *
+ *Complex Shape
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Rectangle</span> <span class="kd">implements</span> <span class="nc">Shape</span><span class="o">{</span>
+
+    <span class="c1">// List of shapes forming the rectangle</span>
+    <span class="c1">// rectangle is centered around origin</span>
+    <span class="nc">Shape</span><span class="o">[]</span> <span class="n">rectangleEdges</span> <span class="o">=</span> <span class="o">{</span><span class="k">new</span> <span class="nc">Line</span><span class="o">(-</span><span class="mi">1</span><span class="o">,-</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,-</span><span class="mi">1</span><span class="o">),</span><span class="k">new</span> <span class="nc">Line</span><span class="o">(-</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">),</span><span class="k">new</span> <span class="nc">Line</span><span class="o">(-</span><span class="mi">1</span><span class="o">,-</span><span class="mi">1</span><span class="o">,-</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">),</span><span class="k">new</span> <span class="nc">Line</span><span class="o">(</span><span class="mi">1</span><span class="o">,-</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">)};</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Shape</span><span class="o">[]</span> <span class="nf">explodeShape</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">rectangleEdges</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * this method is implemented directly in basic shapes 
+     * in complex shapes this method is implemented using delegation
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">renderShapeToScreen</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">for</span><span class="o">(</span><span class="nc">Shape</span> <span class="n">s</span> <span class="o">:</span> <span class="n">rectangleEdges</span><span class="o">){</span>
+               <span class="c1">// delegate to child objects</span>
+            <span class="n">s</span><span class="o">.</span><span class="na">renderShapeToScreen</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+
+<span class="cm">/**
+ * Composite object supporting creation of more complex shapes
+ *  Complex Shape
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ComplexShape</span> <span class="kd">implements</span> <span class="nc">Shape</span> <span class="o">{</span>
+
+    <span class="cm">/**
+     * List of shapes 
+     */</span>
+    <span class="nc">List</span> <span class="n">shapeList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">();</span>
+
+    <span class="cm">/**
+     * 
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addToShape</span><span class="o">(</span><span class="nc">Shape</span> <span class="n">shapeToAddToCurrentShape</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">shapeList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">shapeToAddToCurrentShape</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Shape</span><span class="o">[]</span> <span class="nf">explodeShape</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="nc">Shape</span><span class="o">[])</span> <span class="n">shapeList</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * this method is implemented directly in basic shapes 
+     * in complex shapes this method is handled with delegation
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">renderShapeToScreen</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="k">for</span><span class="o">(</span><span class="nc">Shape</span> <span class="nl">s:</span> <span class="n">shapeList</span><span class="o">){</span>
+            <span class="c1">// use delegation to handle this method</span>
+            <span class="n">s</span><span class="o">.</span><span class="na">renderShapeToScreen</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="cm">/**
+ * Driver Class
+ *
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GraphicsEditor</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">List</span> <span class="n">allShapesInSoftware</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">();</span>
+        <span class="c1">// create a line shape</span>
+        <span class="nc">Shape</span> <span class="n">lineShape</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Line</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">);</span>
+        <span class="c1">// add it to the shapes </span>
+        <span class="n">allShapesInSoftware</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">lineShape</span><span class="o">);</span>
+        <span class="c1">// create a rectangle shape</span>
+        <span class="nc">Shape</span> <span class="n">rectangelShape</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Rectangle</span><span class="o">();</span>
+        <span class="c1">// add it to shapes </span>
+        <span class="n">allShapesInSoftware</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">rectangelShape</span><span class="o">);</span>
+        <span class="c1">// create a complex shape </span>
+        <span class="c1">// note that we have dealt with the complex shape </span>
+        <span class="c1">// not with shape interface because we want </span>
+        <span class="c1">// to do a specific operation </span>
+        <span class="c1">// that does not apply to all shapes </span>
+        <span class="nc">ComplexShape</span> <span class="n">complexShape</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ComplexShape</span><span class="o">();</span>
+        <span class="c1">// complex shape is made of the rectangle and the line</span>
+        <span class="n">complexShape</span><span class="o">.</span><span class="na">addToShape</span><span class="o">(</span><span class="n">rectangelShape</span><span class="o">);</span>
+        <span class="n">complexShape</span><span class="o">.</span><span class="na">addToShape</span><span class="o">(</span><span class="n">lineShape</span><span class="o">);</span>
+        <span class="c1">// add to shapes</span>
+        <span class="n">allShapesInSoftware</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">complexShape</span><span class="o">);</span>
+        <span class="c1">// create a more complex shape which is made of the </span>
+        <span class="c1">// previously created complex shape </span>
+        <span class="c1">// as well as a line </span>
+        <span class="nc">ComplexShape</span> <span class="n">veryComplexShape</span> <span class="o">=</span> <span class="k">new</span>  <span class="nc">ComplexShape</span><span class="o">();</span>
+        <span class="n">veryComplexShape</span><span class="o">.</span><span class="na">addToShape</span><span class="o">(</span><span class="n">complexShape</span><span class="o">);</span>
+        <span class="n">veryComplexShape</span><span class="o">.</span><span class="na">addToShape</span><span class="o">(</span><span class="n">lineShape</span><span class="o">);</span>
+        <span class="n">allShapesInSoftware</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">veryComplexShape</span><span class="o">);</span>
+        <span class="n">renderGraphics</span><span class="o">(</span><span class="n">allShapesInSoftware</span><span class="o">);</span>
+        <span class="c1">// you can explode any object</span>
+        <span class="c1">// despite the fact that the shape might be </span>
+        <span class="c1">// simple or complex</span>
+        <span class="nc">Shape</span><span class="o">[]</span> <span class="n">arrayOfShapes</span> <span class="o">=</span> <span class="n">allShapesInSoftware</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">explodeShape</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">renderGraphics</span><span class="o">(</span><span class="nc">List</span> <span class="n">shapesToRender</span><span class="o">){</span>
+        <span class="c1">// note that despite the fact there are </span>
+        <span class="c1">// simple and complex shapes </span>
+        <span class="c1">// this method deals with them uniformly </span>
+        <span class="c1">// and using the Shape interface</span>
+        <span class="k">for</span><span class="o">(</span><span class="nc">Shape</span> <span class="n">s</span> <span class="o">:</span> <span class="n">shapesToRender</span><span class="o">){</span>
+            <span class="n">s</span><span class="o">.</span><span class="na">renderShapeToScreen</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Alternative Implementation :</strong> Note that in the previous example there were times when we have avoided dealing with composite objects through the Shape interface and we have specifically dealt with them as composites (when using the method addToShape()). To avoid such situations and to further increase uniformity one can add methods to add, remove, as well as get child components to the Shape interface. The UML diagram below shows it:</p>
+
+<p><img src="/pictures/pattern/composite-design-pattern-alternative-implementation-uml-class-diagram.png" alt="alternative implementation" /></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 
+ * Shape is the Component interface
+ *
+ */</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Shape</span> <span class="o">{</span>
+    <span class="cm">/**
+    * Draw shape on screen 
+    * 
+    * Method that must be implemented by Basic as well as 
+    * complex shapes 
+    */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">renderShapeToScreen</span><span class="o">();</span>
+    <span class="cm">/**
+    * Making a complex shape explode results in getting a list of the 
+    * shapes forming this shape 
+    * 
+    *  For example if a rectangle explodes it results in 4 line objects 
+    *  
+    * Making a simple shape explode results in returning the shape itself 
+    */</span>
+    <span class="kd">public</span> <span class="nc">Shape</span><span class="o">[]</span> <span class="nf">explodeShape</span><span class="o">();</span>
+
+    <span class="cm">/**
+    * 
+    * Although this method applies to composites only 
+    * it has been added to interface to enhance uniformity 
+    *  
+    * @param shape
+    */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addToShape</span><span class="o">(</span><span class="nc">Shape</span> <span class="n">shape</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="cm">/**
+ * 
+ * Line is a basic shape that does not support adding shapes  
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Line</span> <span class="kd">implements</span> <span class="nc">Shape</span> <span class="o">{</span>
+
+<span class="c1">// same as previous implementation</span>
+
+
+    <span class="cm">/**
+    * Implementation of the add to shape method
+    * @param shape
+    */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addToShape</span><span class="o">(</span><span class="nc">Shape</span> <span class="n">shape</span><span class="o">){</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"Cannot add a shape to simple shapes ..."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="specific-problems-and-implementation">Specific problems and implementation</h2>
+
+<p>Graphics Editors use composite pattern to implement complex and simple graphics as previously explained.</p>
+
+<p>File System Implemtntations use the composite design pattern as described previously.</p>
+
+<h3 id="consequences">Consequences</h3>
+
+<ul>
+  <li>
+    <p>The composite pattern defines class hierarchies consisting of primitive objects and composite objects. Primitive objects can be composed into more complex objects, which in turn can be composed.</p>
+  </li>
+  <li>
+    <p>Clients treat primitive and composite objects uniformly through a component interface which makes client code simple.</p>
+  </li>
+  <li>
+    <p>Adding new components can be easy and client code does not need to be changed since client deals whith the new components through the component interface.</p>
+  </li>
+</ul>
+
+<h3 id="known-uses">Known Uses</h3>
+
+<p>File System Implementation.</p>
+
+<p>Graphics Editors.</p>
+
+:ET

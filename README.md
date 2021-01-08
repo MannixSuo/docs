@@ -1,1 +1,3 @@
-# 1 第一个GitHub Pages
+# GitHub Pages
+
+https://jekyllrb.com/
