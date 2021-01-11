@@ -18,8 +18,6 @@ Computer Networking A Top Down Approach
 
 ## Readed
 
-2019-8-15 I become a father :)
-
 2019-8 活着、许三观卖血计
 
 2019-7 三体-黑暗森林
