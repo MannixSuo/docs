@@ -5,8 +5,6 @@ use_math: false
 <small>{{ page.date | date: "%-d %B %Y" }}</small>
 <h1>{{ page.title }}</h1>
 
-<p class="view">author: {{ page.author | default: site.author }}</p>
-
 {{content}}
 <script src="{{ '/assets/js/mermaid.min.js' | relative_url }}"></script>
 <script>mermaid.init({}, ".language-mermaid");</script>
